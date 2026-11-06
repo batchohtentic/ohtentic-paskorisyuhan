@@ -1,0 +1,562 @@
+<title>Oh-TEN-tic! Paskorisyuhan 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap">
+<style id="site-style">
+/* Layout: sticky ivory header over hash-routed views; maroon hero bands, ivory reading surfaces, evergreen footer. Single deliberate light palette. */
+:root{
+  --maroon:#4E0C18; --maroon-deep:#360811; --maroon-ink:#64101F;
+  --red:#B3192B; --green:#143326; --green-mid:#235740;
+  --gold:#D4AD43; --gold-soft:#E3C46A; --gold-ink:#8A6A1A;
+  --ivory:#FBF6EC; --paper:#FFFCF6; --line:#E8DCC3; --line-soft:#F3EBDA;
+  --ink:#2A1B1D; --ink-soft:#5C4B4D; --ink-mute:#8A7A7B; --on-dark:#FBF6EC; --on-dark-soft:#E7D9CF;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px)); --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ivory)}
+h1,h2,h3{font-family:var(--display);color:var(--maroon);font-weight:600;letter-spacing:-.015em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1140px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink)}
+.dark .eyebrow{color:var(--gold-soft)}
+.tba{font-style:italic;color:var(--ink-mute)}
+.dark .tba{color:#BFA9A9}
+.pre{white-space:pre-line}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 22px;font:600 14px/1.2 var(--body);text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.btn-red{background:var(--red);color:var(--on-dark)} .btn-red:hover{background:#9E1424}
+.btn-gold{background:var(--gold);color:var(--maroon-deep)} .btn-gold:hover{background:var(--gold-soft)}
+.btn-line{border-color:#D9C4C7;color:var(--maroon-ink);background:transparent} .btn-line:hover{background:#FBF1F2}
+.btn-line-light{border-color:rgba(251,246,236,.35);color:var(--on-dark);background:transparent} .btn-line-light:hover{background:rgba(255,255,255,.08)}
+.btn-sm{padding:7px 14px;font-size:12.5px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--line-soft);color:var(--ink-soft);border:1px solid var(--line)}
+.pill.green{background:#EEF5F1;color:var(--green-mid);border-color:#D3E6DB}
+.pill.gold{background:#F7EDCF;color:var(--gold-ink);border-color:#EEDB9F}
+.pill.red{background:#FBF1F2;color:var(--red);border-color:#F3DADD}
+.pill.live{background:var(--red);color:var(--on-dark);border-color:var(--red)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 0 rgba(54,8,17,.04),0 10px 26px -16px rgba(54,8,17,.25)}
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.section{padding-block:64px}
+.section-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px}
+.section-head h2{font-size:clamp(28px,4vw,38px);margin-top:10px}
+.section-head p.intro{margin-top:10px;color:var(--ink-soft);max-width:60ch}
+.band{border-block:1px solid var(--line);background:#F6EEDF}
+
+/* header */
+.ticker{background:var(--maroon-deep);color:var(--on-dark);font-size:13px}
+.ticker .wrap{display:flex;gap:12px;align-items:center;padding-block:8px}
+.ticker b{background:var(--red);border-radius:999px;padding:2px 9px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;flex:none}
+.ticker span{min-width:0;overflow-wrap:anywhere}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(251,246,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.seal{width:38px;height:38px;flex:none;border-radius:50%;background:var(--maroon);color:var(--gold-soft);display:grid;place-items:center;font:600 15px var(--display);box-shadow:inset 0 0 0 1px rgba(212,173,67,.55)}
+.mark b{display:block;font:600 17px/1 var(--display);color:var(--maroon)}
+.mark small{display:block;margin-top:4px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-mid);white-space:nowrap}
+nav.main{display:none;gap:2px}
+nav.main a{text-decoration:none;font-size:13px;font-weight:500;color:var(--ink-soft);padding:8px 11px;border-radius:999px;white-space:nowrap;position:relative}
+nav.main a:hover,nav.main a[aria-current]{color:var(--maroon)}
+nav.main a[aria-current]::after{content:"";position:absolute;left:11px;right:11px;bottom:1px;height:2px;border-radius:2px;background:var(--gold)}
+.hdr-actions{display:flex;align-items:center;gap:6px}
+.menu-btn{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:var(--maroon);cursor:pointer;display:grid;place-items:center}
+.menu-btn:hover{background:#FBF1F2}
+.mobile-nav{border-top:1px solid var(--line);background:var(--ivory)}
+.mobile-nav a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font:500 19px var(--display);color:var(--maroon)}
+.mobile-nav a span{color:var(--gold)}
+@media (min-width:1180px){nav.main{display:flex}.menu-btn{display:none}.mobile-nav{display:none!important}}
+
+/* hero */
+.dark{background:var(--maroon-deep);color:var(--on-dark);position:relative;overflow:hidden}
+.dark h1,.dark h2,.dark h3{color:var(--on-dark)}
+.dark::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 80% at 88% 8%,rgba(212,173,67,.17),transparent 62%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;gap:44px;padding-block:64px}
+@media (min-width:980px){.hero .wrap{grid-template-columns:1.12fr 1fr;align-items:center;padding-block:88px}}
+.hero h1{font-size:clamp(40px,6.4vw,70px);line-height:1.02;margin-top:18px}
+.hero h1 em{color:var(--gold-soft);font-weight:500}
+.hero p.lede{margin-top:22px;max-width:46ch;color:var(--on-dark-soft);font-size:16px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.ticket{border:1px solid rgba(212,173,67,.32);border-radius:22px;padding:6px;background:rgba(34,5,11,.45)}
+.ticket>div{border:1px solid rgba(251,246,236,.1);border-radius:17px;padding:28px 26px}
+.ticket .row{display:flex;justify-content:space-between;gap:12px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.ticket h2{font-size:clamp(28px,3.4vw,36px);margin-top:16px}
+.ticket h2 span{display:block;color:var(--gold-soft)}
+.ticket .date{margin-top:12px;font:500 17px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-soft)}
+.perf{margin:24px 0;border-top:1px dashed rgba(212,173,67,.38)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.cd div+div{border-left:1px solid rgba(212,173,67,.28)}
+.cd b{display:block;font:600 clamp(34px,5vw,48px)/1 var(--display);font-variant-numeric:tabular-nums}
+.cd small{display:block;margin-top:8px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.cd-msg{font:600 clamp(26px,3.6vw,36px)/1.15 var(--display)}
+.note{margin-top:14px;font-size:11.5px;color:#BFA9A9}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chips span{border:1px solid rgba(212,173,67,.45);color:#EEDB9F;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700}
+.parol{position:absolute;pointer-events:none;color:var(--gold);opacity:.11}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px}
+.stats dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.stats dd{margin:6px 0 0;font:600 36px/1 var(--display);color:var(--maroon);font-variant-numeric:tabular-nums}
+.asof{margin-top:16px;font-size:12px;color:var(--ink-mute)}
+.notice{border:1px dashed #E3C46A;background:#FBF4DE;border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink-soft)}
+.notice b{color:var(--gold-ink)}
+
+/* category cards */
+.cat{overflow:hidden;display:flex;flex-direction:column}
+.cat .top{background:var(--maroon);color:var(--on-dark);padding:18px 22px 22px;position:relative}
+.cat .top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--gold),#F0B93A,#D9692B)}
+.cat .km{margin-top:22px;font:600 60px/1 var(--display);letter-spacing:-.02em}
+.cat .km span{font-size:24px;color:var(--gold-soft);margin-left:4px}
+.cat dl{margin:0;padding:18px 22px 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;font-size:14px}
+.cat dt{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.cat dd{margin:4px 0 0;min-width:0;overflow-wrap:anywhere}
+.cat .fee{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.cat .fee dd{font:600 21px var(--display);color:var(--maroon);margin:0}
+.cat .full{grid-column:1/-1}
+.cat .num{font:600 26px var(--display);color:var(--maroon)}
+
+/* lists, tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.tile{background:var(--paper);padding:22px;text-decoration:none;display:flex;flex-direction:column;min-height:150px;transition:background .2s}
+.tile:hover{background:#fff}
+.tile .k{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-mid)}
+.tile b{margin-top:auto;padding-top:26px;font:600 23px/1.15 var(--display);color:var(--maroon)}
+.tile small{margin-top:4px;color:var(--ink-mute);font-size:13px}
+.tile.green{background:var(--green)}.tile.green:hover{background:var(--green-mid)}
+.tile.green .k{color:var(--gold-soft)}.tile.green b{color:var(--on-dark)}.tile.green small{color:#BFD3C6}
+.ann{padding:22px;display:flex;flex-direction:column;gap:8px}
+.ann .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ann .cat-l{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-mid)}
+.ann h3{font-size:21px}
+.ann .body{color:var(--ink-soft);font-size:14px}
+.ann .foot{font-size:12px;color:var(--ink-mute)}
+.ann img{border-radius:12px;border:1px solid var(--line);margin-top:6px}
+.empty{padding:48px 24px;text-align:center}
+.empty b{display:block;font:600 21px var(--display);color:var(--maroon);margin-top:10px}
+.empty p{margin-top:6px;color:var(--ink-soft);font-size:14px}
+.page-hero{border-bottom:1px solid var(--line);background:var(--paper)}
+.page-hero .wrap{padding-block:52px}
+.page-hero h1{font-size:clamp(34px,5vw,52px);margin-top:14px}
+.page-hero p{margin-top:14px;max-width:62ch;color:var(--ink-soft);font-size:16px}
+.bullets{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.bullets li{display:flex;gap:12px;color:var(--ink-soft)}
+.bullets li::before{content:"✦";color:var(--gold);flex:none;font-size:11px;margin-top:4px}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7;margin:18px 0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px;border-top:1px solid rgba(251,246,236,.15);padding-top:28px;margin-top:36px}
+.facts dt{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.facts dd{margin:8px 0 0;font-weight:500}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.kv span:first-child{color:var(--ink-mute);font-size:14px}
+.kv span:last-child{font-weight:600;color:var(--maroon);text-align:right}
+.timeline{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--gold-soft);display:grid;gap:18px}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-29px;top:26px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--ivory)}
+.ev{padding:20px 22px;display:grid;gap:12px}
+@media (min-width:700px){.ev{grid-template-columns:170px 1fr}}
+.ev .when b{display:block;font:600 18px var(--display);color:var(--maroon)}
+.ev .when small{color:var(--ink-mute)}
+.sections{border-block:1px solid var(--line)}
+.sections>div{display:grid;gap:6px;padding:18px 0;border-bottom:1px solid var(--line)}
+.sections>div:last-child{border-bottom:0}
+@media (min-width:700px){.sections>div{grid-template-columns:220px 1fr}}
+.sections h3{font:700 12px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+table.lb{width:100%;border-collapse:collapse;font-size:14px}
+table.lb th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);padding:10px 12px;border-bottom:1px solid var(--line)}
+table.lb td{padding:12px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
+table.lb tr.p1 td:first-child{color:var(--gold-ink);font-weight:700}
+.scroll-x{overflow-x:auto}
+.podium{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:8px;max-width:560px;margin:8px auto 0}
+.podium>div{text-align:center}
+.podium .step{border-radius:10px 10px 0 0;color:var(--on-dark);display:grid;place-items:center;font:600 30px var(--display);box-shadow:inset 0 -10px 18px rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.18)}
+.podium .s1 .step{height:130px;background:linear-gradient(180deg,#D4AD43,#9C7820)}
+.podium .s2 .step{height:96px;background:linear-gradient(180deg,#7A1426,#4E0C18)}
+.podium .s3 .step{height:72px;background:linear-gradient(180deg,#E0843F,#B85A20)}
+.podium .who{padding:8px 4px;font-size:13px;min-width:0;overflow-wrap:anywhere}
+.podium .who b{display:block;font:600 15px var(--display);color:var(--maroon)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.gallery figure{margin:0}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block}
+.gallery figcaption{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.filters button{flex:none;border:0;border-radius:999px;padding:8px 16px;font:500 13px var(--body);background:var(--line-soft);color:var(--ink-soft);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--maroon);color:var(--on-dark)}
+footer.foot{background:var(--green);color:#D9E5DD;font-size:14px;position:relative;overflow:hidden}
+footer.foot .wrap{display:grid;gap:36px;padding-block:52px}
+@media (min-width:800px){footer.foot .wrap{grid-template-columns:1.5fr 1fr 1fr}}
+footer.foot .mark b{color:var(--on-dark)} footer.foot .mark small{color:var(--gold-soft)}
+footer.foot ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}
+footer.foot a{text-decoration:none} footer.foot a:hover{color:var(--gold-soft)}
+footer.foot .eyebrow{color:var(--gold-soft)}
+.copy{border-top:1px solid rgba(251,246,236,.12);font-size:12px;color:#9DB5A6}
+.copy .wrap{padding-block:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+/* editor */
+.edit-fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:70;box-shadow:0 10px 26px -8px rgba(54,8,17,.6)}
+.editor{position:fixed;inset:0;z-index:80;background:rgba(34,5,11,.4);display:flex;justify-content:flex-end}
+.panel{width:min(620px,100%);height:100%;background:var(--paper);display:flex;flex-direction:column;box-shadow:-20px 0 40px -20px rgba(0,0,0,.4)}
+.panel-head{padding:calc(14px + env(safe-area-inset-top,0px)) var(--gutter-r) 12px var(--gutter-l);border-bottom:1px solid var(--line);display:grid;gap:12px}
+.panel-head .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.panel-head h2{font-size:22px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--ivory);border-radius:999px;padding:6px 12px;font:600 12.5px var(--body);color:var(--ink-soft);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--maroon);border-color:var(--maroon);color:var(--on-dark)}
+.panel-body{flex:1;overflow-y:auto;padding:20px var(--gutter-r) 28px var(--gutter-l);display:grid;gap:16px;align-content:start}
+.panel-foot{border-top:1px solid var(--line);padding:12px var(--gutter-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gutter-l);display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--ivory)}
+.panel-foot .msg{font-size:13px;flex:1;min-width:160px}
+.msg.ok{color:var(--green-mid)} .msg.err{color:var(--red)}
+.f{display:grid;gap:5px}
+.f label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.f input,.f textarea,.f select{width:100%;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);padding:9px 11px;font:14px/1.45 var(--body)}
+.f textarea{min-height:84px;resize:vertical}
+.f .hint{font-size:12px;color:var(--ink-mute)}
+.f.check{display:flex;align-items:center;gap:8px}
+.f.check input{width:auto}
+.f.check label{text-transform:none;letter-spacing:0;font-size:13.5px;font-weight:500}
+.frow{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.item{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:12px;background:var(--ivory)}
+.item-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.item-head b{font:600 16px var(--display);color:var(--maroon);min-width:0;overflow-wrap:anywhere}
+.linkish{border:0;background:none;color:var(--red);font:600 12.5px var(--body);cursor:pointer;padding:4px}
+.ed-h{font:600 18px var(--display);color:var(--maroon);margin-top:6px}
+.ed-p{font-size:13px;color:var(--ink-soft)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div id="app"></div>
+
+<script type="application/json" id="site-data">{"site":{"eventName":"CCES Interbatch Paskorisyuhan 2026","theme":"Oh-TEN-tic Fun, Christmas for Everyone!","host":"CCES Alumni Association – Batch 2010 “Oh-TEN-tic!”","location":"Can-avid, Eastern Samar, Philippines","facebookUrl":"","contactEmail":"","ticker":""},"funRun":{"title":"Oh-TEN-tic! Fun Run for Everyone","date":"2026-12-05","startTime":"","endTime":"","assembly":"","startingPoint":"","destination":"","route":"","formUrl":"","deadline":"","regOpen":false,"regInstructions":"","payInstructions":"","inclusions":[],"guidelines":[],"reminders":[]},"categories":[{"code":"5K","km":5,"fee":"","gunTime":"","start":"","route":"","regStatus":"not_open","registered":"","confirmed":""},{"code":"8K","km":8,"fee":"","gunTime":"","start":"","route":"","regStatus":"not_open","registered":"","confirmed":""},{"code":"12K","km":12,"fee":"","gunTime":"","start":"","route":"","regStatus":"not_open","registered":"","confirmed":""}],"countsUpdated":"","announcements":[],"schedule":[{"id":"funrun","title":"Oh-TEN-tic! Fun Run for Everyone","date":"2026-12-05","time":"","venue":"","description":"The kick-off event of CCES Interbatch Paskorisyuhan 2026, with 5KM, 8KM and 12KM categories.","status":"upcoming"}],"activities":{},"results":{"5K":{"official":false,"rows":[]},"8K":{"official":false,"rows":[]},"12K":{"official":false,"rows":[]},"tournaments":[]},"upcoming":[],"gallery":[],"updatedAt":""}</script>
+
+<script id="site-app">
+(function(){
+"use strict";
+var TITLE = "Oh-TEN-tic! Paskorisyuhan 2026";
+var HEAD = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n';
+var DATA = JSON.parse(document.getElementById("site-data").textContent);
+var view = DATA;          // what the page renders (the draft while editing)
+var draft = null, editTab = "funrun", canEdit = false, menuOpen = false, annFilter = "all";
+
+var ACTIVITIES = [
+  {slug:"parade-opening",title:"Parade & Formal Opening",kind:"Program",tagline:"Parade, formal opening program, games and Laro ng Lahi",sections:["Assembly time","Parade route","Venue","Participating batches","Program sequence","Games & Laro ng Lahi","Announcements"]},
+  {slug:"basketball",title:"Basketball",kind:"Sports",tagline:"Interbatch basketball tournament",sections:["Tournament announcements","Registration details","Team listings","Game schedule","Match results","Standings","Championship updates","Awarding"]},
+  {slug:"volleyball",title:"Volleyball",kind:"Sports",tagline:"Interbatch volleyball tournament",sections:["Tournament announcements","Team registration","Game schedule","Results","Standings","Championship announcements"]},
+  {slug:"pickleball",title:"Pickleball",kind:"Sports",tagline:"Pickleball tournament",sections:["Tournament announcements","Registration","Player listings","Match schedules","Results","Winners"]},
+  {slug:"mobile-legends",title:"Mobile Legends",kind:"E-Sports",tagline:"Mobile Legends: Bang Bang tournament",sections:["Tournament announcements","Team registration","Tournament mechanics","Match brackets","Game schedules","Match results","Championship announcements"]},
+  {slug:"bingo-socials",title:"Bingo Socials",kind:"Socials",tagline:"Community bingo socials",sections:["Schedule","Venue","Mechanics","Announcements"]},
+  {slug:"raffle-bonanza",title:"Raffle Bonanza",kind:"Socials",tagline:"The Paskorisyuhan Raffle Bonanza",sections:["Event date","Venue","Time","Ticket details","Mechanics","Prize announcements","Winners"]}
+];
+var NAV = [["home","Home"],["fun-run","Fun Run"],["activities","Activities"],["schedule","Event Schedule"],["announcements","Announcements"],["results","Results & Winners"],["gallery","Gallery"],["about","About Us"]];
+var ANN_CATS = {general:"General",fun_run:"Fun Run",registration:"Registration",sports:"Sports & Games",parade_opening:"Parade & Opening",bingo:"Bingo Socials",raffle:"Raffle Bonanza",results:"Results & Awarding",reminder:"Important Reminder"};
+var REG = {not_open:["Registration not yet open",""],open:["Registration open","green"],closed:["Registration closed","red"],full:["Slots full","gold"]};
+var EV = {upcoming:["Upcoming","gold"],ongoing:["Ongoing","live"],completed:["Completed","green"],postponed:["Postponed",""],cancelled:["Cancelled","red"]};
+var UP = {draft:["Draft",""],reserved:["Reserved",""],coming_soon:["Announcement coming soon","gold"],registration_open:["Registration open","green"],fully_booked:["Fully booked","red"],completed:["Completed",""]};
+
+/* ── helpers ───────────────────────────────────────── */
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function tba(v,label){return (v!==undefined&&v!==null&&String(v).trim()!=="")?esc(v):'<span class="tba">'+esc(label||"To be announced")+"</span>";}
+function safeUrl(u){u=String(u||"").trim();return /^https:\/\/[^\s"'<>]+$/i.test(u)?u:"";}
+function pill(pair){return '<span class="pill '+pair[1]+'">'+esc(pair[0])+"</span>";}
+function manila(date,time){return new Date(date+"T"+(time||"00:00")+":00+08:00");}
+function fmtDate(date,opts){if(!date)return "";var d=manila(date);if(isNaN(d))return esc(date);return new Intl.DateTimeFormat("en-PH",Object.assign({timeZone:"Asia/Manila",month:"long",day:"numeric",year:"numeric"},opts||{})).format(d);}
+function fmtTime(t){if(!t)return "";var p=t.split(":");var h=+p[0];return ((h%12)||12)+":"+p[1]+" "+(h<12?"AM":"PM");}
+function peso(v){if(v===""||v==null||isNaN(+v))return "";return "₱"+(+v).toLocaleString("en-PH");}
+function catName(c){return c.km+"KM";}
+function uid(){return Math.random().toString(36).slice(2,10);}
+function lines(a){return (a||[]).filter(Boolean);}
+function act(slug){return view.activities[slug]||{};}
+
+var PAROL = (function(){var pts=[];for(var i=0;i<10;i++){var r=i%2?19:46,a=Math.PI/5*i-Math.PI/2;pts.push((50+r*Math.cos(a)).toFixed(1)+","+(50+r*Math.sin(a)).toFixed(1));}
+  var spokes="";for(var j=0;j<5;j++){var b=Math.PI/5*2*j-Math.PI/2;spokes+='<line x1="'+(50+12*Math.cos(b)).toFixed(1)+'" y1="'+(50+12*Math.sin(b)).toFixed(1)+'" x2="'+(50+46*Math.cos(b)).toFixed(1)+'" y2="'+(50+46*Math.sin(b)).toFixed(1)+'" opacity=".55"/>';}
+  return function(style){return '<svg class="parol" style="'+style+'" viewBox="0 0 100 140" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><polygon points="'+pts.join(" ")+'" stroke-linejoin="round"/><circle cx="50" cy="50" r="12"/>'+spokes+'<path d="M38 88 q-3 22 -6 46 M50 92 v44 M62 88 q3 22 6 46" opacity=".7"/></svg>';};})();
+
+function registerBtn(cls,label){var u=safeUrl(view.funRun.formUrl);
+  return u?'<a class="btn '+cls+'" href="'+esc(u)+'" target="_blank" rel="noopener">'+(label||"Register Now")+' ↗</a>':'<a class="btn '+cls+'" href="#fun-run">'+(label||"Register Now")+"</a>";}
+
+/* ── layout ────────────────────────────────────────── */
+function header(route){
+  var nav=NAV.map(function(n){return '<a href="#'+n[0]+'"'+(route===n[0]||(n[0]==="activities"&&route.indexOf("activity-")===0)?' aria-current="page"':"")+">"+n[1]+"</a>";}).join("");
+  var t=view.site.ticker?'<div class="ticker" role="region" aria-label="Urgent update"><div class="wrap"><b>Update</b><span>'+esc(view.site.ticker)+"</span></div></div>":"";
+  var urgent=view.announcements.filter(function(a){return a.priority==="urgent";}).slice(0,1);
+  if(!t&&urgent.length)t='<div class="ticker"><div class="wrap"><b>Urgent</b><span><a href="#announcements">'+esc(urgent[0].title)+"</a></span></div></div>";
+  return t+'<header class="top"><div class="wrap"><a class="mark" href="#home" aria-label="Home"><span class="seal">10</span><span><b>Oh-TEN-tic!</b><small>Paskorisyuhan 2026</small></span></a>'+
+    '<nav class="main" aria-label="Main">'+nav+'</nav><div class="hdr-actions">'+registerBtn("btn-red btn-sm")+
+    '<button class="menu-btn" id="menu-btn" aria-expanded="'+menuOpen+'" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+(menuOpen?'<path d="M6 6l12 12M18 6L6 18"/>':'<path d="M4 7h16M4 12h16M4 17h10"/>')+"</svg></button></div></div>"+
+    (menuOpen?'<div class="mobile-nav"><div class="wrap">'+NAV.concat([["whats-next","What’s Next?"]]).map(function(n){return '<a href="#'+n[0]+'">'+n[1]+"<span>→</span></a>";}).join("")+"</div></div>":"")+"</header>";
+}
+function footer(){
+  var s=view.site,fb=safeUrl(s.facebookUrl);
+  return '<footer class="foot">'+PAROL("right:-20px;top:-10px;width:150px;height:210px;opacity:.14")+'<div class="wrap"><div><a class="mark" href="#home"><span class="seal">10</span><span><b>Oh-TEN-tic!</b><small>Paskorisyuhan 2026</small></span></a>'+
+  '<p style="margin-top:18px;max-width:42ch">'+esc(s.eventName)+" · “"+esc(s.theme)+"” Hosted by "+esc(s.host)+", "+esc(s.location)+".</p>"+
+  (fb?'<p style="margin-top:18px"><a class="btn btn-line-light btn-sm" href="'+esc(fb)+'" target="_blank" rel="noopener">Follow us on Facebook ↗</a></p>':"")+
+  (s.contactEmail?'<p style="margin-top:12px;user-select:all">'+esc(s.contactEmail)+"</p>":"")+
+  '</div><div><p class="eyebrow">Explore</p><ul>'+NAV.map(function(n){return '<li><a href="#'+n[0]+'">'+n[1]+"</a></li>";}).join("")+'</ul></div><div><p class="eyebrow">Participate</p><ul><li><a href="#fun-run">Fun Run registration</a></li><li><a href="https://claude.ai/artifact/TSCghGGazxNFktctfuaoP9" target="_blank" rel="noopener">Live race board ↗</a></li><li><a href="#results">Race results</a></li><li><a href="#whats-next">What’s Next, Oh-TEN-tic?</a></li></ul></div></div>'+
+  '<div class="copy"><div class="wrap"><span>© 2026 CCES Alumni Association – Batch 2010 “Oh-TEN-tic!”</span><span>All times are Philippine Standard Time (UTC+8)</span></div></div></footer>';
+}
+function pageHero(eyebrow,title,intro){return '<section class="page-hero"><div class="wrap"><p class="eyebrow">✦ '+eyebrow+"</p><h1>"+title+"</h1>"+(intro?"<p>"+intro+"</p>":"")+"</div></section>";}
+function empty(title,text){return '<div class="card empty"><span style="color:var(--gold)">✦</span><b>'+esc(title)+"</b>"+(text?"<p>"+esc(text)+"</p>":"")+"</div>";}
+
+/* ── countdown ─────────────────────────────────────── */
+function cdWindow(){var f=view.funRun,s=manila(f.date,f.startTime).getTime();var e=f.endTime?manila(f.date,f.endTime).getTime():manila(f.date).getTime()+864e5;return [s,Math.max(e,s)];}
+function cdHTML(){
+  var w=cdWindow(),now=Date.now();
+  if(now>=w[1])return '<p class="cd-msg" role="status">Thank You for Running With Us!</p>';
+  if(now>=w[0])return '<p class="cd-msg" role="status">The Race is On!</p>';
+  var s=Math.floor((w[0]-now)/1000),d=Math.floor(s/86400);s-=d*86400;var h=Math.floor(s/3600);s-=h*3600;var m=Math.floor(s/60);s-=m*60;
+  function c(v,l){return "<div><b>"+String(v).padStart(2,"0")+"</b><small>"+l+"</small></div>";}
+  return '<div class="cd" role="timer">'+c(d,"Days")+c(h,"Hours")+c(m,"Minutes")+c(s,"Seconds")+"</div>";
+}
+setInterval(function(){document.querySelectorAll("[data-cd]").forEach(function(el){el.innerHTML=cdHTML();});},1000);
+
+/* ── category card ─────────────────────────────────── */
+function catCard(c,detailed){
+  var has=c.registered!==""&&c.registered!=null;
+  return '<article class="card cat"><div class="top">'+pill(REG[c.regStatus]||REG.not_open)+'<p class="km">'+c.km+"<span>KM</span></p></div><dl>"+
+  '<div class="fee"><dt>Registration fee</dt><dd>'+tba(peso(c.fee))+"</dd></div>"+
+  (has?'<div><dt>Registered</dt><dd class="num">'+esc(c.registered)+'</dd></div><div><dt>Confirmed</dt><dd class="num" style="color:var(--green-mid)">'+tba(c.confirmed,"—")+"</dd></div>":"")+
+  '<div class="full"><dt>Gun time</dt><dd>'+tba(fmtTime(c.gunTime))+"</dd></div>"+
+  (detailed?'<div class="full"><dt>Starting point</dt><dd>'+tba(c.start)+'</dd></div><div class="full"><dt>Race route</dt><dd class="pre">'+tba(c.route)+"</dd></div>":"")+
+  "</dl></article>";
+}
+function countsBlock(){
+  var cats=view.categories,has=cats.some(function(c){return c.registered!==""&&c.registered!=null;});
+  if(!has)return '<div class="notice"><b>Registration counts will be posted here.</b> The committee updates these numbers from the official registration list. No numbers are shown until then.</div>';
+  var n=function(v){return +v||0;},tot=0,conf=0;cats.forEach(function(c){tot+=n(c.registered);conf+=n(c.confirmed);});
+  var up=view.schedule.filter(function(e){return e.status==="upcoming"||e.status==="ongoing";}).length,done=view.schedule.filter(function(e){return e.status==="completed";}).length;
+  var items=[["Total registrants",tot],["Confirmed",conf]].concat(cats.map(function(c){return [catName(c)+" runners",n(c.registered)];})).concat([["Upcoming activities",up],["Completed events",done]]);
+  return '<dl class="stats">'+items.map(function(i){return "<div><dt>"+i[0]+"</dt><dd>"+i[1]+"</dd></div>";}).join("")+"</dl>"+(view.countsUpdated?'<p class="asof">Registration figures as of '+esc(view.countsUpdated)+".</p>":"");
+}
+function annCard(a){
+  var img=a.poster?'<img src="'+esc(a.poster)+'" alt="Poster: '+esc(a.title)+'" loading="lazy">':"";
+  return '<article class="card ann"><div class="meta"><span class="cat-l">'+esc(ANN_CATS[a.category]||"General")+"</span>"+(a.priority==="urgent"?pill(["Urgent","red"]):a.priority==="important"?pill(["Important","gold"]):"")+(a.pinned?pill(["Pinned",""]):"")+"</div><h3>"+esc(a.title)+"</h3>"+img+'<p class="body pre">'+esc(a.body)+'</p><p class="foot">'+fmtDate(a.date)+(a.author?" · "+esc(a.author):"")+"</p></article>";
+}
+function sortedAnn(){return view.announcements.slice().sort(function(a,b){return (b.pinned?1:0)-(a.pinned?1:0)||String(b.date).localeCompare(String(a.date));});}
+
+/* ── views ─────────────────────────────────────────── */
+function vHome(){
+  var f=view.funRun,s=view.site,fb=safeUrl(s.facebookUrl),ann=sortedAnn().slice(0,3);
+  return '<section class="dark hero">'+PAROL("left:-40px;top:40px;width:200px;height:280px")+'<div class="wrap"><div><p class="eyebrow">✦ '+esc(s.eventName)+"</p>"+
+  '<h1>Oh-TEN-tic Fun,<br><em>Christmas</em> for Everyone!</h1><p class="lede">Hosted by Batch 2010, <b style="color:var(--on-dark)">Oh-TEN-tic!</b> Join us in '+esc(s.location.replace(", Philippines",""))+" for a season of running, games, parades and homecoming.</p>"+
+  '<div class="ctas">'+registerBtn("btn-gold")+'<a class="btn btn-line-light" href="#activities">Explore Activities</a></div>'+
+  (fb?'<p style="margin-top:20px"><a href="'+esc(fb)+'" target="_blank" rel="noopener" style="color:var(--on-dark-soft);font-size:14px">Follow Batch 2010 on Facebook ↗</a></p>':"")+
+  '</div><div class="ticket"><div><div class="row"><span style="color:var(--gold-soft)">Featured event</span><span style="color:#BFA9A9">Kick-off</span></div>'+
+  "<h2>Oh-TEN-tic! Fun Run <span>for Everyone</span></h2><p class=\"date\">"+fmtDate(f.date,{day:"2-digit"})+'</p><div class="perf"></div><div data-cd>'+cdHTML()+"</div>"+
+  (f.startTime?"":'<p class="note">Counting down to race day. Exact gun time to be announced.</p>')+
+  '<div class="chips">'+view.categories.map(function(c){return "<span>"+catName(c)+"</span>";}).join("")+"</div></div></div></div></section>"+
+  '<section style="background:var(--paper);border-bottom:1px solid var(--line)"><div class="wrap" style="padding-block:36px">'+countsBlock()+"</div></section>"+
+  '<section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">✦ The main event</p><h2>Choose your distance</h2><p class="intro">Three categories, one finish line.</p></div><a class="btn btn-line" href="#fun-run">Full Fun Run details →</a></div><div class="grid g3">'+view.categories.map(function(c){return catCard(c,false);}).join("")+"</div></div></section>"+
+  '<section class="section band"><div class="wrap"><div class="section-head"><div><p class="eyebrow">✦ Latest announcements</p><h2>News from the committee</h2></div><a class="btn btn-line" href="#announcements">All announcements →</a></div>'+
+  (ann.length?'<div class="grid g3">'+ann.map(annCard).join("")+"</div>":empty("No announcements yet","Official updates from Batch 2010 will be posted here."))+"</div></section>"+
+  '<section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">✦ Paskorisyuhan 2026</p><h2>More than a run</h2><p class="intro">From the parade and formal opening to the courts, the arena and the raffle draw.</p></div></div><div class="tiles">'+
+  ACTIVITIES.map(function(a){return '<a class="tile" href="#activity-'+a.slug+'"><span class="k">'+a.kind+"</span><b>"+a.title+"</b><small>"+a.tagline+"</small></a>";}).join("")+
+  '<a class="tile green" href="#whats-next"><span class="k">Reserved</span><b>What’s Next, Oh-TEN-tic?</b><small>Future activities →</small></a></div></div></section>';
+}
+function vFunRun(){
+  var f=view.funRun,u=safeUrl(f.formUrl);
+  function list(a,e){a=lines(a);return a.length?'<ul class="bullets">'+a.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+"</ul>":'<p class="tba">'+e+"</p>";}
+  return '<section class="dark"><div class="wrap" style="position:relative;padding-block:60px"><p class="eyebrow">Paskorisyuhan 2026 · Kick-off event</p><h1 style="font-size:clamp(38px,6vw,62px);margin-top:14px;max-width:16ch">'+esc(f.title)+"</h1>"+
+  '<dl class="facts"><div><dt>Date</dt><dd>'+fmtDate(f.date,{weekday:"long"})+'</dd></div><div><dt>Assembly</dt><dd>'+tba(f.assembly)+'</dd></div><div><dt>Starting point</dt><dd>'+tba(f.startingPoint)+'</dd></div><div><dt>Destination</dt><dd>'+tba(f.destination)+"</dd></div></dl>"+
+  '<div class="ticket" style="margin-top:34px"><div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between"><div data-cd style="flex:1;min-width:260px;max-width:460px">'+cdHTML()+'</div><div style="display:flex;flex-wrap:wrap;gap:10px">'+registerBtn("btn-gold")+'<a class="btn btn-line-light" href="https://claude.ai/artifact/TSCghGGazxNFktctfuaoP9" target="_blank" rel="noopener">Live race board ↗</a></div></div></div></div></section>"+
+  '<section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">✦ Race categories</p><h2>5KM · 8KM · 12KM</h2></div></div><div class="grid g3">'+view.categories.map(function(c){return catCard(c,true);}).join("")+'</div><div style="margin-top:24px">'+countsBlock()+"</div></div></section>"+
+  '<section class="section band"><div class="wrap grid g2" style="align-items:start"><div><p class="eyebrow">Registration</p><h2 style="font-size:36px;margin-top:10px">How to register</h2><div style="margin-top:22px"><div class="kv"><span>Status</span><span>'+(f.regOpen?"Open":"Not yet open")+'</span></div><div class="kv"><span>Deadline</span><span>'+tba(f.deadline)+"</span></div></div>"+
+  (u?'<p style="margin-top:24px"><a class="btn btn-red" href="'+esc(u)+'" target="_blank" rel="noopener">Open the official registration form ↗</a></p>':'<div class="notice" style="margin-top:24px"><b>Registration form link not yet published.</b> The Register Now button will open the official Google Form as soon as the committee posts it.</div>')+
+  '</div><div class="grid"><div class="card" style="padding:22px"><h3 style="font-size:20px">Registration instructions</h3><p class="pre" style="margin-top:10px;color:var(--ink-soft)">'+tba(f.regInstructions)+'</p></div><div class="card" style="padding:22px"><h3 style="font-size:20px">Payment instructions</h3><p class="pre" style="margin-top:10px;color:var(--ink-soft)">'+tba(f.payInstructions)+"</p></div></div></div></section>"+
+  '<section class="section"><div class="wrap grid g3"><div><h2 style="font-size:24px">Inclusions</h2><div class="rule"></div>'+list(f.inclusions,"Race kit inclusions to be announced.")+'</div><div><h2 style="font-size:24px">Guidelines</h2><div class="rule"></div>'+list(f.guidelines,"Race guidelines to be announced.")+'</div><div><h2 style="font-size:24px">Important reminders</h2><div class="rule"></div>'+list(f.reminders,"Reminders will be posted before race day.")+"</div></div>"+
+  '<div class="wrap" style="margin-top:40px"><div class="card" style="padding:26px"><h2 style="font-size:24px">Route information</h2><p class="pre" style="margin-top:10px;color:var(--ink-soft)">'+tba(f.route,"The official race route will be published by the organizing committee.")+"</p></div></div></section>";
+}
+function vActivities(){
+  var groups=["Program","Sports","E-Sports","Socials"];
+  return pageHero("Paskorisyuhan 2026","Activities","The parade and formal opening, the tournaments, the arena and the socials. Select an activity for its announcements, schedules and results.")+
+  '<section class="section"><div class="wrap grid" style="gap:40px">'+groups.map(function(g){return '<div><p class="eyebrow">'+g+'</p><div class="grid g3" style="margin-top:14px">'+ACTIVITIES.filter(function(a){return a.kind===g;}).map(function(a){
+    return '<a class="card" href="#activity-'+a.slug+'" style="padding:22px;text-decoration:none;display:block"><h3 style="font-size:24px">'+a.title+'</h3><p style="margin-top:8px;color:var(--ink-soft);font-size:14px">'+esc(act(a.slug).tagline||a.tagline)+'</p><p style="margin-top:18px;font-weight:700;font-size:13px;color:var(--green-mid)">View details →</p></a>';}).join("")+"</div></div>";}).join("")+"</div></section>";
+}
+function vActivity(slug){
+  var a=ACTIVITIES.filter(function(x){return x.slug===slug;})[0];if(!a)return vNotFound();
+  var d=act(slug),sec=d.sections||{},reg=safeUrl(d.registrationUrl);
+  return pageHero(a.kind,esc(a.title),esc(d.tagline||a.tagline))+'<section class="section"><div class="wrap grid" style="gap:36px">'+
+  (reg?'<p><a class="btn btn-red" href="'+esc(reg)+'" target="_blank" rel="noopener">Register ↗</a></p>':"")+
+  '<div><h2 style="font-size:26px">About this activity</h2><p class="pre" style="margin-top:12px;color:var(--ink-soft);max-width:70ch">'+tba(d.description,"Full details will be announced by the organizing committee.")+"</p></div>"+
+  '<div class="sections">'+a.sections.map(function(s){return "<div><h3>"+s+'</h3><p class="pre">'+tba(sec[s],"Not yet posted")+"</p></div>";}).join("")+'</div><p><a href="#activities" style="font-weight:700;color:var(--green-mid);font-size:14px;text-decoration:none">← All activities</a></p></div></section>';
+}
+function vSchedule(){
+  var ev=view.schedule.slice().sort(function(a,b){return String(a.date||"9").localeCompare(String(b.date||"9"))||String(a.time).localeCompare(String(b.time));});
+  return pageHero("Master program","Event Schedule","The official Paskorisyuhan 2026 calendar. All times are Philippine Standard Time.")+'<section class="section"><div class="wrap">'+
+  (ev.length?'<ol class="timeline">'+ev.map(function(e){return '<li><article class="card ev"><div class="when"><b>'+(e.date?fmtDate(e.date,{month:"short"}):'<span class="tba">Date TBA</span>')+"</b><small>"+(e.time?fmtTime(e.time):"Time TBA")+'</small></div><div><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><h2 style="font-size:20px">'+esc(e.title)+"</h2>"+pill(EV[e.status]||EV.upcoming)+'</div><p style="margin-top:4px;font-size:14px;color:var(--green-mid)">'+tba(e.venue,"Venue TBA")+"</p>"+(e.description?'<p class="pre" style="margin-top:10px;font-size:14px;color:var(--ink-soft)">'+esc(e.description)+"</p>":"")+"</div></article></li>";}).join("")+"</ol>":empty("The program is being finalized","Schedules will be published here by the organizing committee."))+"</div></section>";
+}
+function vAnnouncements(){
+  var list=sortedAnn().filter(function(a){return annFilter==="all"||a.category===annFilter;});
+  var cats=[["all","All"]].concat(Object.keys(ANN_CATS).map(function(k){return [k,ANN_CATS[k]];}));
+  return pageHero("Announcement center","Announcements & Updates","Official updates from the Batch 2010 organizing committee.")+'<section class="section" style="padding-top:36px"><div class="wrap"><div class="filters" role="group" aria-label="Filter by category">'+
+  cats.map(function(c){return '<button data-filter="'+c[0]+'" aria-pressed="'+(annFilter===c[0])+'">'+c[1]+"</button>";}).join("")+'</div><div style="margin-top:24px">'+
+  (list.length?'<div class="grid g3">'+list.map(annCard).join("")+"</div>":empty("No announcements here yet",""))+"</div></div></section>";
+}
+function vResults(){
+  var r=view.results;
+  function board(c){var b=r[c.code]||{rows:[]},rows=b.rows.slice().sort(function(x,y){return (+x.rank||999)-(+y.rank||999);});
+    var top=rows.slice(0,3);
+    var pod=top.length?'<div class="podium">'+[1,0,2].map(function(i){var w=top[i];if(!w)return "<div></div>";return '<div class="s'+(i+1)+'"><div class="who"><b>'+esc(w.name)+"</b>"+esc(w.time)+(w.prize?"<br>"+esc(w.prize):"")+'</div><div class="step">'+(i+1)+"</div></div>";}).join("")+"</div>":"";
+    return '<div class="card" style="padding:22px"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px"><h3 style="font-size:28px">'+catName(c)+"</h3>"+(rows.length?pill(b.official?["Official results","green"]:["Provisional","gold"]):pill(["Awaiting race day",""]))+"</div>"+
+    (rows.length?pod+'<div class="scroll-x" style="margin-top:16px"><table class="lb"><thead><tr><th>Rank</th><th>Bib</th><th>Runner</th><th>Finish time</th></tr></thead><tbody>'+rows.map(function(x){return '<tr class="'+(x.rank=="1"?"p1":"")+'"><td>'+esc(x.rank)+"</td><td>"+esc(x.bib)+"</td><td>"+esc(x.name)+"</td><td>"+esc(x.time)+"</td></tr>";}).join("")+"</tbody></table></div>":'<p style="margin-top:12px;font-size:14px;color:var(--ink-soft)">Results will be posted after the race. Provisional results are always labelled until the Results Administrator confirms them.</p>')+"</div>";}
+  return pageHero("Results & winners","Celebrating our champions","Fun Run leaderboards and tournament champions. Provisional results are labelled until confirmed as official.")+
+  '<section class="section"><div class="wrap grid" style="gap:28px"><h2 style="font-size:28px">Oh-TEN-tic! Fun Run</h2><div class="grid g2">'+view.categories.map(board).join("")+'</div><h2 style="font-size:28px;margin-top:20px">Tournaments &amp; socials</h2>'+
+  (r.tournaments.length?'<div class="grid g3">'+r.tournaments.map(function(t){return '<article class="card ann"><span class="cat-l">'+esc(t.activity)+"</span><h3>"+esc(t.title)+'</h3><p class="body pre">'+esc(t.body)+"</p></article>";}).join("")+"</div>":empty("Tournament results will appear here","Champions are published as each tournament concludes."))+"</div></section>";
+}
+function vGallery(){
+  var g=view.gallery;
+  return pageHero("Gallery","Moments of Paskorisyuhan","Official photos from the Fun Run, the parade, the tournaments and every celebration in between.")+'<section class="section"><div class="wrap">'+
+  (g.length?'<div class="gallery">'+g.map(function(p){return '<figure><img src="'+esc(p.url)+'" alt="'+esc(p.caption||"Event photo")+'" loading="lazy">'+(p.caption?"<figcaption>"+esc(p.caption)+"</figcaption>":"")+"</figure>";}).join("")+"</div>":empty("The gallery opens after our first event","Official photos will be uploaded by the Batch 2010 media team."))+"</div></section>";
+}
+function vAbout(){
+  var s=view.site,fb=safeUrl(s.facebookUrl);
+  return pageHero("About us",'Batch 2010, <em style="color:var(--red);font-weight:500">Oh-TEN-tic!</em>',"Proud hosts of "+esc(s.eventName)+".")+
+  '<section class="section"><div class="wrap grid g2" style="align-items:start"><div style="display:grid;gap:16px;color:var(--ink-soft);font-size:16px;max-width:62ch"><p>The <b style="color:var(--maroon)">'+esc(s.eventName)+"</b> brings together alumni of every batch for a season of homecoming in "+esc(s.location)+".</p><p>This year’s celebration is hosted by the "+esc(s.host)+", under the theme <em>“"+esc(s.theme)+"”</em>. The season opens with the Oh-TEN-tic! Fun Run for Everyone, followed by the parade and formal opening, sports tournaments, Laro ng Lahi, bingo socials and the Raffle Bonanza.</p><p>This website is the official home of Batch 2010 for every Paskorisyuhan 2026 activity.</p></div>"+
+  '<div class="card dark" style="padding:28px;background:var(--green)"><p class="eyebrow">Get in touch</p><p style="margin-top:12px;color:#D9E5DD">For questions about registration or the program, message the official Batch 2010 Facebook Page.</p>'+(fb?'<p style="margin-top:18px"><a class="btn btn-gold" href="'+esc(fb)+'" target="_blank" rel="noopener">Message us on Facebook ↗</a></p>':"")+(s.contactEmail?'<p style="margin-top:14px;user-select:all">'+esc(s.contactEmail)+"</p>":"")+"</div></div></section>";
+}
+function vNext(){
+  var u=view.upcoming.filter(function(x){return x.status!=="draft"&&x.status!=="reserved";});
+  return pageHero("Reserved for the future",'What’s Next, <em style="color:var(--red);font-weight:500">Oh-TEN-tic?</em>',"Batch 2010 is just getting started. Upcoming activities are revealed here as they are announced.")+'<section class="section"><div class="wrap">'+
+  (u.length?'<div class="grid g3">'+u.map(function(x){var r=safeUrl(x.url);return '<article class="card ann">'+(x.poster?'<img src="'+esc(x.poster)+'" alt="">':"")+pill(UP[x.status]||UP.coming_soon)+"<h3>"+esc(x.title)+'</h3><p style="font-size:14px;color:var(--green-mid)">'+tba(x.date,"Date TBA")+" · "+tba(x.venue,"Venue TBA")+"</p>"+(x.description?'<p class="body pre">'+esc(x.description)+"</p>":"")+(r&&x.status==="registration_open"?'<p><a class="btn btn-red btn-sm" href="'+esc(r)+'" target="_blank" rel="noopener">Register ↗</a></p>':"")+"</article>";}).join("")+"</div>":empty("Something Oh-TEN-tic is coming","Stay tuned. New activities will be announced soon."))+"</div></section>";
+}
+function vNotFound(){return pageHero("Not found","Page not found",'This page may have moved. <a href="#home">Back to home</a>.');}
+
+function route(){var h=(location.hash||"").replace(/^#/,"");return h||"home";}
+function render(keepScroll){
+  var r=route(),body;
+  if(r==="home")body=vHome();else if(r==="fun-run")body=vFunRun();else if(r==="activities")body=vActivities();
+  else if(r.indexOf("activity-")===0)body=vActivity(r.slice(9));else if(r==="schedule")body=vSchedule();
+  else if(r==="announcements")body=vAnnouncements();else if(r==="results")body=vResults();else if(r==="gallery")body=vGallery();
+  else if(r==="about")body=vAbout();else if(r==="whats-next")body=vNext();else body=vNotFound();
+  var y=window.scrollY;
+  document.getElementById("app").innerHTML=header(r)+'<main id="main">'+body+"</main>"+footer()+(canEdit&&!draft?'<button class="btn btn-red edit-fab" id="edit-open">✎ Edit website</button>':"");
+  if(keepScroll)window.scrollTo(0,y);
+}
+window.addEventListener("hashchange",function(){menuOpen=false;render();window.scrollTo(0,0);});
+document.addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;
+  if(t.id==="menu-btn"){menuOpen=!menuOpen;render(true);}
+  else if(t.dataset.filter){annFilter=t.dataset.filter;render(true);}
+  else if(t.id==="edit-open")openEditor();
+});
+
+/* ══ EDITOR (visible only to people who can edit this artifact) ══ */
+function getPath(o,p){return p.split(".").reduce(function(a,k){return a==null?a:a[k];},o);}
+function setPath(o,p,v){var ks=p.split("."),last=ks.pop(),t=ks.reduce(function(a,k){if(a[k]==null)a[k]={};return a[k];},o);t[last]=v;}
+function fld(label,path,opt){opt=opt||{};var v=getPath(draft,path),id="f-"+path.replace(/\./g,"-");
+  var attrs=' id="'+id+'" data-path="'+path+'"'+(opt.lines?' data-lines="1"':"");
+  var input;
+  if(opt.type==="select")input="<select"+attrs+">"+opt.options.map(function(o){return '<option value="'+o[0]+'"'+(String(v)===o[0]?" selected":"")+">"+esc(o[1])+"</option>";}).join("")+"</select>";
+  else if(opt.type==="check")return '<div class="f check"><input type="checkbox"'+attrs+' data-bool="1"'+(v?" checked":"")+'><label for="'+id+'">'+esc(label)+"</label></div>";
+  else if(opt.type==="textarea"||opt.lines)input="<textarea"+attrs+' rows="'+(opt.rows||3)+'">'+esc(opt.lines?(v||[]).join("\n"):v)+"</textarea>";
+  else input='<input type="'+(opt.type||"text")+'"'+attrs+' value="'+esc(v)+'"'+(opt.placeholder?' placeholder="'+esc(opt.placeholder)+'"':"")+">";
+  return '<div class="f"><label for="'+id+'">'+esc(label)+"</label>"+input+(opt.hint?'<span class="hint">'+esc(opt.hint)+"</span>":"")+"</div>";}
+function row(){return '<div class="frow">'+[].slice.call(arguments).join("")+"</div>";}
+function item(title,del,inner){return '<div class="item"><div class="item-head"><b>'+esc(title||"Untitled")+'</b><button class="linkish" data-del="'+del+'">Remove</button></div>'+inner+"</div>";}
+function selOpts(map){return Object.keys(map).map(function(k){return [k,map[k][0]||map[k]];});}
+
+var TABS=[["funrun","Fun Run"],["categories","Categories"],["announcements","Announcements"],["schedule","Schedule"],["activities","Activities"],["results","Results"],["upcoming","What’s Next"],["gallery","Gallery"],["general","General"]];
+function edBody(){
+  var d=draft,t=editTab;
+  if(t==="funrun")return '<p class="ed-p">Leave a field empty to show “To be announced”.</p>'+
+    fld("Official Google Form registration link","funRun.formUrl",{type:"url",placeholder:"https://forms.gle/…",hint:"Every Register Now button opens this link. Must start with https://"})+
+    fld("Registration is open","funRun.regOpen",{type:"check"})+
+    row(fld("Event title","funRun.title"),fld("Event date","funRun.date",{type:"date"}))+
+    row(fld("Countdown start time","funRun.startTime",{type:"time",hint:"Philippine time"}),fld("Event end time","funRun.endTime",{type:"time",hint:"After this: “Thank you for running with us!”"}))+
+    row(fld("Assembly time","funRun.assembly",{placeholder:"e.g. 4:30 AM"}),fld("Registration deadline","funRun.deadline",{placeholder:"e.g. November 28, 2026"}))+
+    row(fld("Starting point","funRun.startingPoint"),fld("Destination / finish","funRun.destination"))+
+    fld("Route information","funRun.route",{type:"textarea"})+fld("Registration instructions","funRun.regInstructions",{type:"textarea",rows:4})+fld("Payment instructions","funRun.payInstructions",{type:"textarea",rows:4})+
+    fld("Inclusions (one per line)","funRun.inclusions",{lines:true,rows:4})+fld("Guidelines (one per line)","funRun.guidelines",{lines:true,rows:4})+fld("Important reminders (one per line)","funRun.reminders",{lines:true,rows:4});
+  if(t==="categories")return d.categories.map(function(c,i){var p="categories."+i+".";return '<div class="item"><div class="item-head"><b>'+c.km+"KM</b></div>"+
+    row(fld("Fee (₱)",p+"fee",{type:"number"}),fld("Gun time",p+"gunTime",{type:"time"}),fld("Registration",p+"regStatus",{type:"select",options:selOpts(REG)}))+
+    fld("Starting point",p+"start")+fld("Race route",p+"route",{type:"textarea"})+
+    row(fld("Registered (count)",p+"registered",{type:"number"}),fld("Confirmed (count)",p+"confirmed",{type:"number"}))+"</div>";}).join("")+
+    fld("Counts last updated","countsUpdated",{placeholder:"e.g. November 10, 2026, 6:00 PM",hint:"Shown under the numbers so visitors know how current they are. Leave the counts empty to hide them."});
+  if(t==="announcements")return '<button class="btn btn-line btn-sm" data-add="announcements">+ New announcement</button>'+d.announcements.map(function(a,i){var p="announcements."+i+".";return item(a.title,"announcements."+i,
+    fld("Title",p+"title")+fld("Message",p+"body",{type:"textarea",rows:4})+row(fld("Category",p+"category",{type:"select",options:selOpts(ANN_CATS)}),fld("Priority",p+"priority",{type:"select",options:[["normal","Normal"],["important","Important"],["urgent","Urgent (shows in top bar)"]]}))+
+    row(fld("Date",p+"date",{type:"date"}),fld("Author",p+"author"))+fld("Pin to the top",p+"pinned",{type:"check"})+posterField(p+"poster"));}).join("");
+  if(t==="schedule")return '<button class="btn btn-line btn-sm" data-add="schedule">+ New event</button>'+d.schedule.map(function(e,i){var p="schedule."+i+".";return item(e.title,"schedule."+i,
+    fld("Title",p+"title")+row(fld("Date",p+"date",{type:"date"}),fld("Time",p+"time",{type:"time"}),fld("Status",p+"status",{type:"select",options:selOpts(EV)}))+fld("Venue",p+"venue")+fld("Description",p+"description",{type:"textarea"}));}).join("");
+  if(t==="activities")return '<p class="ed-p">Each activity has its own page. Fill in whatever is ready.</p>'+ACTIVITIES.map(function(a){var p="activities."+a.slug+".";if(!d.activities[a.slug])d.activities[a.slug]={sections:{}};if(!d.activities[a.slug].sections)d.activities[a.slug].sections={};
+    return '<details class="item"><summary style="cursor:pointer"><b style="font:600 16px var(--display);color:var(--maroon)">'+a.title+"</b></summary>"+fld("Short tagline",p+"tagline",{placeholder:a.tagline})+fld("About this activity",p+"description",{type:"textarea"})+fld("Registration link",p+"registrationUrl",{type:"url",placeholder:"https://…"})+
+    a.sections.map(function(s){return fld(s,p+"sections."+s.replace(/\./g,""),{type:"textarea",rows:2});}).join("")+"</details>";}).join("");
+  if(t==="results")return '<p class="ed-p">Add finishers per category. Results show as <b>Provisional</b> until you tick “Official”.</p>'+d.categories.map(function(c){var b=d.results[c.code]||(d.results[c.code]={official:false,rows:[]});var p="results."+c.code;
+    return '<div class="item"><div class="item-head"><b>'+c.km+'KM leaderboard</b><button class="btn btn-line btn-sm" data-add="'+p+'.rows">+ Finisher</button></div>'+fld("Results are OFFICIAL (approved)",p+".official",{type:"check"})+
+    b.rows.map(function(x,i){var q=p+".rows."+i+".";return '<div class="item" style="background:#fff"><div class="item-head"><b>#'+esc(x.rank||"?")+" "+esc(x.name)+'</b><button class="linkish" data-del="'+p+".rows."+i+'">Remove</button></div>'+row(fld("Rank",q+"rank",{type:"number"}),fld("Bib",q+"bib"),fld("Finish time",q+"time",{placeholder:"00:24:13"}))+row(fld("Runner name",q+"name"),fld("Prize",q+"prize",{placeholder:"Top 3 only"}))+"</div>";}).join("")+"</div>";}).join("")+
+    '<div class="item"><div class="item-head"><b>Tournament champions</b><button class="btn btn-line btn-sm" data-add="results.tournaments">+ Result</button></div>'+d.results.tournaments.map(function(x,i){var q="results.tournaments."+i+".";return item(x.title,"results.tournaments."+i,row(fld("Activity",q+"activity",{placeholder:"Basketball"}),fld("Title",q+"title",{placeholder:"Champions"}))+fld("Details",q+"body",{type:"textarea"}));}).join("")+"</div>";
+  if(t==="upcoming")return '<p class="ed-p">Draft and Reserved items stay hidden from the public.</p><button class="btn btn-line btn-sm" data-add="upcoming">+ New activity slot</button>'+d.upcoming.map(function(x,i){var p="upcoming."+i+".";return item(x.title,"upcoming."+i,
+    fld("Title",p+"title")+row(fld("Date",p+"date",{placeholder:"e.g. December 2026"}),fld("Venue",p+"venue"),fld("Status",p+"status",{type:"select",options:selOpts(UP)}))+fld("Description",p+"description",{type:"textarea"})+fld("Registration link",p+"url",{type:"url"})+posterField(p+"poster"));}).join("");
+  if(t==="gallery")return '<p class="ed-p">Upload JPG, PNG or WebP photos (up to 20 MB each).</p><div class="f"><label for="g-up">Add photos</label><input type="file" id="g-up" accept="image/jpeg,image/png,image/webp" multiple></div><div class="thumbs">'+d.gallery.map(function(g,i){return '<div class="item" style="padding:8px;gap:6px"><img src="'+esc(g.url)+'" alt="" style="aspect-ratio:4/3;object-fit:cover;border-radius:8px">'+fld("Caption","gallery."+i+".caption")+'<button class="linkish" data-del="gallery.'+i+'">Remove</button></div>';}).join("")+"</div>";
+  if(t==="general")return fld("Official Facebook Page link","site.facebookUrl",{type:"url",placeholder:"https://www.facebook.com/…"})+fld("Urgent top-bar message","site.ticker",{hint:"Shown on every page in a red bar. Leave empty to hide."})+
+    row(fld("Event name","site.eventName"),fld("Theme","site.theme"))+row(fld("Host","site.host"),fld("Location","site.location"))+fld("Public contact email","site.contactEmail",{type:"email"});
+  return "";
+}
+function posterField(path){var v=getPath(draft,path);return '<div class="f"><label>Poster (optional)</label>'+(v?'<img src="'+esc(v)+'" alt="" style="max-height:140px;width:auto;border-radius:8px"><button class="linkish" data-clear="'+path+'" style="justify-self:start">Remove poster</button>':'<input type="file" accept="image/jpeg,image/png,image/webp" data-upload="'+path+'">')+"</div>";}
+
+function openEditor(){draft=JSON.parse(JSON.stringify(DATA));view=draft;render(true);drawEditor("");}
+function closeEditor(){var el=document.getElementById("editor");if(el)el.remove();draft=null;view=DATA;render(true);}
+function drawEditor(msg,cls){
+  var el=document.getElementById("editor");
+  if(!el){el=document.createElement("div");el.id="editor";el.className="editor";document.body.appendChild(el);}
+  var y=el.querySelector(".panel-body");y=y?y.scrollTop:0;
+  el.innerHTML='<div class="panel" role="dialog" aria-label="Edit website"><div class="panel-head"><div class="row"><h2>Edit website</h2><button class="btn btn-line btn-sm" id="ed-close">Close</button></div><div class="tabs" role="tablist">'+
+    TABS.map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(editTab===t[0])+'">'+t[1]+"</button>";}).join("")+'</div></div><div class="panel-body">'+edBody()+
+    '</div><div class="panel-foot"><span class="msg '+(cls||"")+'" id="ed-msg" role="status">'+(msg||"Changes preview behind this panel. Nothing is public until you save.")+'</span><button class="btn btn-red" id="ed-save">Save &amp; publish</button></div></div>';
+  el.querySelector(".panel-body").scrollTop=y;
+}
+function setMsg(t,cls){var m=document.getElementById("ed-msg");if(m){m.textContent=t;m.className="msg "+(cls||"");}}
+var rt=null;function preview(){clearTimeout(rt);rt=setTimeout(function(){render(true);},250);}
+document.addEventListener("input",function(e){var el=e.target;if(!draft||!el.dataset||!el.dataset.path)return;
+  var v=el.dataset.bool?el.checked:el.dataset.lines?el.value.split("\n").map(function(s){return s.trim();}).filter(Boolean):el.value;
+  setPath(draft,el.dataset.path,v);preview();});
+document.addEventListener("change",function(e){var el=e.target;if(!draft)return;
+  if(el.dataset&&el.dataset.bool){setPath(draft,el.dataset.path,el.checked);preview();}
+  if(el.id==="g-up"&&el.files.length)upload(el.files,function(url){draft.gallery.push({id:uid(),url:url,caption:""});});
+  if(el.dataset&&el.dataset.upload&&el.files.length){var p=el.dataset.upload;upload(el.files,function(url){setPath(draft,p,url);});}
+});
+document.addEventListener("click",function(e){if(!draft)return;var b=e.target.closest("button");if(!b)return;
+  if(b.id==="ed-close")closeEditor();
+  else if(b.id==="ed-save")save();
+  else if(b.dataset.tab){editTab=b.dataset.tab;var el=document.getElementById("editor");el.querySelector(".panel-body").scrollTop=0;drawEditor("");}
+  else if(b.dataset.del){var ks=b.dataset.del.split("."),idx=+ks.pop();getPath(draft,ks.join(".")).splice(idx,1);drawEditor("Removed. Save to publish.");preview();}
+  else if(b.dataset.clear){setPath(draft,b.dataset.clear,"");drawEditor("");preview();}
+  else if(b.dataset.add){var a=getPath(draft,b.dataset.add),today=new Date(Date.now()+288e5).toISOString().slice(0,10);
+    var tpl={announcements:{id:uid(),title:"",body:"",category:"general",priority:"normal",pinned:false,date:today,author:"",poster:""},schedule:{id:uid(),title:"",date:"",time:"",venue:"",description:"",status:"upcoming"},upcoming:{id:uid(),title:"",date:"",venue:"",description:"",url:"",status:"draft",poster:""},"results.tournaments":{id:uid(),activity:"",title:"",body:""}}[b.dataset.add]||{rank:String(a.length+1),bib:"",name:"",time:"",prize:""};
+    a.unshift?(b.dataset.add.indexOf("rows")>0?a.push(tpl):a.unshift(tpl)):0;drawEditor("Added. Fill it in, then save.");preview();}
+});
+async function upload(files,onUrl){
+  var assets=window.claude&&await window.claude.use("assets");
+  if(!assets){setMsg("Photo upload is not available in this view. Open the website on claude.ai while signed in as an editor.","err");return;}
+  setMsg("Uploading…");
+  try{for(var i=0;i<files.length;i++){var r=await assets.upload(files[i]);onUrl(r.url);}drawEditor("Uploaded. Save to publish.","ok");preview();}
+  catch(err){setMsg("Upload failed: "+((err&&err.message)||"unknown error")+". Try a smaller JPG or PNG.","err");}
+}
+function buildDoc(d){
+  d.updatedAt=new Date().toISOString();
+  var json=JSON.stringify(d).replace(/</g,"\\u003c");
+  return HEAD+"<title>"+TITLE+'</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n'+
+    '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap">\n'+
+    '<style id="site-style">'+document.getElementById("site-style").textContent+'</style>\n\n<div id="app"></div>\n\n<script type="application/json" id="site-data">'+json+"<\/script>\n\n"+
+    '<script id="site-app">'+document.getElementById("site-app").textContent+"<\/script>\n</body></html>";
+}
+async function save(){
+  var btn=document.getElementById("ed-save");btn.disabled=true;setMsg("Publishing…");
+  try{var artifact=window.claude&&await window.claude.use("artifact");
+    if(!artifact){setMsg("Saving is not available in this view. Open the website on claude.ai while signed in as an editor.","err");btn.disabled=false;return;}
+    await artifact.publish(buildDoc(draft));setMsg("Published! The page is reloading with your changes.","ok");
+  }catch(err){var c=err&&err.code;
+    if(c==="conflict")setMsg("Someone else saved first. The page is reloading with their version; please redo this edit.","err");
+    else if(c==="not_writer"||c==="not_granted")setMsg("Your account can view this website but not edit it. Ask the owner for edit access.","err");
+    else if(c==="rate_limited")setMsg("Too many saves in a short time. Wait a minute, then save again.","err");
+    else setMsg("Could not publish: "+((err&&err.message)||"unknown error"),"err");
+    btn.disabled=false;}
+}
+
+render();
+(async function(){try{var user=window.claude&&await window.claude.use("user");if(user&&await user.canEdit()){canEdit=true;render(true);}}catch(e){}})();
+})();
+</script>

@@ -1,0 +1,434 @@
+<title>Oh-TEN-tic! Fun Run Live</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style id="lr-style">
+/* Layout: race-day board. Maroon scoreboard header, winners podium first, then per-category checkpoint progress and a live arrivals feed. Staff tools sit below for signed-in race staff only. Single deliberate light palette. */
+:root{
+  --maroon:#4E0C18; --maroon-deep:#360811; --red:#B3192B; --green:#143326; --green-mid:#235740; --green-soft:#EEF5F1;
+  --gold:#D4AD43; --gold-soft:#E3C46A; --gold-ink:#8A6A1A; --gold-bg:#F7EDCF; --ember:#C8662A;
+  --ivory:#FBF6EC; --paper:#FFFCF6; --line:#E8DCC3; --line-soft:#F3EBDA;
+  --ink:#2A1B1D; --ink-soft:#5C4B4D; --ink-mute:#8A7A7B; --on-dark:#FBF6EC; --on-dark-soft:#E7D9CF;
+  --display:"Fraunces",Georgia,serif; --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gl:max(16px,env(safe-area-inset-left,0px)); --gr:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--ivory);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--maroon-deep)}
+h1,h2,h3{font-family:var(--display);font-weight:600;color:var(--maroon);margin:0;line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink)}
+.mute{color:var(--ink-mute)}
+.num{font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:var(--line-soft);color:var(--ink-soft);white-space:nowrap}
+.pill.live{background:var(--red);border-color:var(--red);color:var(--on-dark)}
+.pill.live::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.2s infinite}
+.pill.ok{background:var(--green-soft);color:var(--green-mid);border-color:#D3E6DB}
+.pill.prov{background:var(--gold-bg);color:var(--gold-ink);border-color:#EEDB9F}
+.pill.off{background:#F1ECEC;color:var(--ink-mute)}
+@keyframes blink{50%{opacity:.25}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 0 rgba(54,8,17,.04),0 10px 24px -16px rgba(54,8,17,.25)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 20px;font:700 14px/1.2 var(--body);border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn-red{background:var(--red);color:var(--on-dark)}
+.btn-green{background:var(--green-mid);color:var(--on-dark)}
+.btn-gold{background:var(--gold);color:var(--maroon-deep)}
+.btn-line{background:transparent;border-color:#D9C4C7;color:var(--maroon)}
+.btn-sm{padding:7px 13px;font-size:12.5px}
+
+/* scoreboard header */
+.top{background:var(--maroon-deep);color:var(--on-dark);position:relative;overflow:hidden}
+.top::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 90% at 90% 0%,rgba(212,173,67,.2),transparent 60%);pointer-events:none}
+.top .wrap{position:relative;padding-block:26px 22px;display:grid;gap:18px}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand a{color:var(--on-dark-soft);font-size:13px}
+.seal{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:var(--gold-soft);font:600 14px var(--display);box-shadow:inset 0 0 0 1px rgba(212,173,67,.6);margin-right:10px;vertical-align:middle}
+.top h1{color:var(--on-dark);font-size:clamp(30px,5vw,48px)}
+.top h1 span{color:var(--gold-soft)}
+.meta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:13px;color:var(--on-dark-soft)}
+.tabs{display:flex;gap:8px;overflow-x:auto}
+.tabs a{flex:none;text-decoration:none;border-radius:999px;padding:9px 18px;font:800 14px var(--body);color:var(--on-dark-soft);border:1px solid rgba(251,246,236,.25)}
+.tabs a[aria-current]{background:var(--gold);border-color:var(--gold);color:var(--maroon-deep)}
+
+/* winners */
+.winners{background:linear-gradient(180deg,#F6EEDF,var(--ivory));border-bottom:1px solid var(--line)}
+.winners .wrap{padding-block:28px;display:grid;gap:16px}
+.announce{display:grid;gap:10px}
+.announce .row{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:12px 16px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.announce .place{font:600 15px var(--display);min-width:92px}
+.announce .p1{color:var(--gold-ink)} .announce .p2{color:var(--maroon)} .announce .p3{color:var(--ember)}
+.announce .who{font-weight:800;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.podium{display:grid;grid-template-columns:1fr 1.1fr 1fr;align-items:end;gap:8px;max-width:620px;margin:6px auto 0;width:100%}
+.podium .col{text-align:center;min-width:0}
+.podium .name{font:600 16px/1.2 var(--display);color:var(--maroon);overflow-wrap:anywhere}
+.podium .time{font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.podium .bib{font-size:11px;color:var(--ink-mute)}
+.podium .step{margin-top:8px;border-radius:10px 10px 0 0;display:grid;place-items:center;color:var(--on-dark);font:600 34px var(--display);box-shadow:inset 0 -14px 22px rgba(0,0,0,.2),inset 0 2px 0 rgba(255,255,255,.22);position:relative}
+.podium .step::before{content:"";position:absolute;left:-6px;right:-6px;top:-8px;height:8px;border-radius:6px 6px 0 0;background:inherit;filter:brightness(1.18)}
+.podium .s1{height:150px;background:linear-gradient(180deg,#E3C46A,#9C7820)}
+.podium .s2{height:110px;background:linear-gradient(180deg,#8A1D30,#4E0C18)}
+.podium .s3{height:82px;background:linear-gradient(180deg,#F0B93A,#C8662A)}
+.podium .empty-slot .name{color:var(--ink-mute);font-style:italic;font-weight:500}
+
+/* progress */
+.grid{display:grid;gap:18px}
+.two{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.section{padding-block:30px}
+.cp{display:grid;gap:6px}
+.cp+.cp{margin-top:14px}
+.cp .lab{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.cp .lab b{font-weight:800}
+.bar{height:10px;border-radius:999px;background:var(--line-soft);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--green-mid),#3E8A64)}
+.bar.fin i{background:linear-gradient(90deg,var(--gold),var(--ember))}
+.feed{list-style:none;margin:0;padding:0}
+.feed li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.feed li:last-child{border-bottom:0}
+.feed .tag{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green-mid);grid-column:1/-1}
+.feed .tag.fin{color:var(--gold-ink)}
+.feed .b{font-weight:800;color:var(--maroon)}
+.feed .n{min-width:0;overflow-wrap:anywhere}
+.feed .t{color:var(--ink-mute);font-size:13px}
+.scroll-x{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
+tr.r1 td:first-child{color:var(--gold-ink);font-weight:800} tr.r2 td:first-child{color:var(--maroon);font-weight:800} tr.r3 td:first-child{color:var(--ember);font-weight:800}
+.empty{padding:28px 18px;text-align:center;color:var(--ink-soft);font-size:14px}
+.foot{padding-block:28px 40px;font-size:12.5px;color:var(--ink-mute);display:grid;gap:6px}
+
+/* staff */
+.staff{background:#F3EBDA;border-bottom:1px solid var(--line)}
+.staff .wrap{padding-block:24px 32px;display:grid;gap:18px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--paper);gap:3px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;border-radius:999px;padding:8px 16px;font:700 13px var(--body);color:var(--ink-soft);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--maroon);color:var(--on-dark)}
+.conn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.1em}
+.conn i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.conn.live i{background:#2E9B5F}.conn.rec i{background:var(--gold)}.conn.off i{background:var(--red)}
+.f{display:grid;gap:5px}
+.f label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.f input,.f select,.f textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:10px 12px;font:15px/1.4 var(--body)}
+.f textarea{min-height:120px;font-size:13px;font-family:ui-monospace,Menlo,monospace}
+.bibin{font:600 44px/1 var(--display)!important;text-align:center;letter-spacing:.06em;padding:14px!important}
+.runner{min-height:64px;border-radius:12px;padding:12px 14px;border:1px dashed var(--line);background:var(--paper);display:grid;align-content:center}
+.runner.ok{border:1px solid #BFDCCB;background:var(--green-soft)}
+.runner.bad{border:1px solid #F0C6CC;background:#FBF1F2;color:var(--red)}
+.runner b{font:600 20px var(--display);color:var(--maroon)}
+.bigbtn{width:100%;padding:18px;font-size:17px;border-radius:14px}
+.toast{border-radius:12px;padding:12px 14px;font-weight:700}
+.toast.ok{background:var(--green-mid);color:var(--on-dark)}
+.toast.err{background:var(--red);color:var(--on-dark)}
+.toast.warn{background:var(--gold-bg);color:var(--gold-ink)}
+.row2{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.stack{display:grid;gap:12px}
+.panel{padding:18px;display:grid;gap:14px}
+.panel h3{font-size:20px}
+.hint{font-size:12.5px;color:var(--ink-mute)}
+.linkish{border:0;background:none;color:var(--red);font:700 12.5px var(--body);cursor:pointer;padding:4px 6px}
+@media (prefers-reduced-motion:reduce){.pill.live::before{animation:none}}
+</style>
+
+<div id="app"></div>
+
+<script type="application/json" id="pub-data">{"v":1,"updatedAt":0,"race":{"5K":{"km":5,"checkpoints":["Turning Point 1"],"startedAt":0,"official":false},"8K":{"km":8,"checkpoints":["Turning Point 1"],"startedAt":0,"official":false},"12K":{"km":12,"checkpoints":["Turning Point 1"],"startedAt":0,"official":false}},"totals":{},"reports":[]}</script>
+
+<script id="lr-app">
+(function(){
+"use strict";
+var TITLE="Oh-TEN-tic! Fun Run Live";
+var HEAD='<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n';
+var MAIN_SITE="https://claude.ai/artifact/E4R8P5qSZzHTLcXGbUvNi2";
+var CODES=["5K","8K","12K"];
+var PUB=JSON.parse(document.getElementById("pub-data").textContent);
+
+/* Live state (staff with database access) falls back to the published snapshot. */
+var live={race:null,runners:null,reports:null,fresh:false,lastAnswer:0};
+var db=null,artifactNs=null,isStaff=false,canPublish=false;
+var hot=(window.claude&&window.claude.hot)||null;
+
+function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem("lr:"+k));localStorage.setItem("lr:"+k,JSON.stringify(v));}catch(e){return null;}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function clock(ms){return ms?new Intl.DateTimeFormat("en-PH",{timeZone:"Asia/Manila",hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true}).format(new Date(ms)):"";}
+function hms(ms){if(ms==null||ms<0||isNaN(ms))return "";var s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return [h,m,x].map(function(v){return String(v).padStart(2,"0");}).join(":");}
+function normCat(v){var m=String(v||"").match(/(\d+)/);return m&&CODES.indexOf(m[1]+"K")>=0?m[1]+"K":null;}
+function normBib(v){return String(v||"").replace(/\D/g,"").replace(/^0+(?=\d)/,"");}
+function km(code){return code.replace("K","KM");}
+
+function data(){
+  return {
+    race:live.race||PUB.race,
+    reports:live.reports||PUB.reports,
+    totals:live.runners?totalsFrom(live.runners):PUB.totals,
+    updatedAt:live.reports?Date.now():PUB.updatedAt,
+    isLive:!!live.reports
+  };
+}
+function totalsFrom(list){var t={};(list||[]).forEach(function(r){t[r.cat]=(t[r.cat]||0)+1;});return t;}
+function cpList(race,code){var c=race[code]||{checkpoints:[]};return (c.checkpoints||[]).map(function(n,i){return {key:"cp"+(i+1),name:n};}).concat([{key:"finish",name:"Finish line"}]);}
+function finishers(d,code){
+  var start=(d.race[code]||{}).startedAt||0;
+  return d.reports.filter(function(r){return r.cat===code&&r.cp==="finish";}).sort(function(a,b){return a.atMs-b.atMs||String(a.bib).localeCompare(String(b.bib));})
+    .map(function(r,i){return {rank:i+1,bib:r.bib,name:r.name,atMs:r.atMs,elapsed:start?r.atMs-start:null};});
+}
+function status(d,code){var c=d.race[code]||{};if(c.official)return ["Official results","ok"];if(c.startedAt)return ["Race in progress","live"];return ["Not started","off"];}
+
+/* ── public board ──────────────────────────────────── */
+function curCat(){var h=(location.hash||"").replace("#","").toUpperCase();return CODES.indexOf(h)>=0?h:"5K";}
+function vBoard(){
+  var d=data(),code=curCat(),st=status(d,code),fin=finishers(d,code),off=(d.race[code]||{}).official,total=d.totals[code]||0;
+  var tabs=CODES.map(function(c){return '<a href="#'+c.toLowerCase()+'"'+(c===code?' aria-current="page"':"")+">"+km(c)+"</a>";}).join("");
+  var upd=d.isLive?"Live from race control":(d.updatedAt?"Board updated "+clock(d.updatedAt):"Waiting for the first update");
+  var h='<header class="top"><div class="wrap"><div class="brand"><span class="eyebrow" style="color:var(--gold-soft)"><span class="seal">10</span>Paskorisyuhan 2026 · December 5</span><a href="'+MAIN_SITE+'" target="_blank" rel="noopener">Main website ↗</a></div>'+
+    "<h1>Oh-TEN-tic! Fun Run <span>Live</span></h1>"+
+    '<div class="meta"><span class="pill '+st[1]+'">'+st[0]+'</span><span class="num">'+esc(upd)+'</span>'+(d.isLive?"":'<span>Updates about every 30 seconds while the race is on.</span>')+"</div>"+
+    '<nav class="tabs" aria-label="Category">'+tabs+"</nav></div></header>";
+
+  // winners announcement
+  var top3=fin.slice(0,3),lbl=off?"Official winners":"Provisional top finishers";
+  var places=["1st Place","2nd Place","3rd Place"];
+  h+='<section class="winners" aria-label="Winners"><div class="wrap"><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><div><p class="eyebrow">'+km(code)+" · "+lbl+'</p><h2 style="font-size:clamp(24px,3.6vw,32px);margin-top:6px">'+(top3.length?(off?"Congratulations to our champions!":"First to arrive at the finish line"):"The finish line is waiting")+"</h2></div>"+
+    (top3.length?'<span class="pill '+(off?"ok":"prov")+'">'+(off?"Official":"Provisional, pending verification")+"</span>":"")+"</div>";
+  if(top3.length){
+    h+='<div class="announce">'+top3.map(function(w,i){return '<div class="row"><span class="place p'+(i+1)+'">'+places[i]+'</span><span class="who">'+esc(w.name||"Runner")+'</span><span class="mute">Bib #'+esc(w.bib)+'</span><span class="num" style="margin-left:auto;font-weight:700">'+(w.elapsed!=null?hms(w.elapsed):"Arrived "+clock(w.atMs))+"</span></div>";}).join("")+"</div>";
+  }
+  h+='<div class="podium">'+[1,0,2].map(function(i){var w=top3[i];return '<div class="col'+(w?"":" empty-slot")+'"><p class="name">'+(w?esc(w.name||"Runner"):"—")+'</p><p class="time">'+(w?(w.elapsed!=null?hms(w.elapsed):clock(w.atMs)):"&nbsp;")+'</p><p class="bib">'+(w?"Bib #"+esc(w.bib):"&nbsp;")+'</p><div class="step s'+(i+1)+'">'+(i+1)+"</div></div>";}).join("")+"</div></div></section>";
+
+  // progress + feed
+  var cps=cpList(d.race,code),catReports=d.reports.filter(function(r){return r.cat===code;});
+  var prog=cps.map(function(cp){var n=catReports.filter(function(r){return r.cp===cp.key;}).length,pct=total?Math.min(100,Math.round(n/total*100)):0;
+    return '<div class="cp"><div class="lab"><b>'+esc(cp.name)+'</b><span class="num">'+n+(total?" of "+total:"")+' runners</span></div><div class="bar'+(cp.key==="finish"?" fin":"")+'"><i style="width:'+pct+'%"></i></div></div>';}).join("");
+  var recent=d.reports.slice().sort(function(a,b){return b.atMs-a.atMs;}).slice(0,25);
+  var feed=recent.length?'<ul class="feed">'+recent.map(function(r){var cpn=(cpList(d.race,r.cat).filter(function(c){return c.key===r.cp;})[0]||{name:r.cp}).name;
+    return '<li><span class="tag'+(r.cp==="finish"?" fin":"")+'">'+km(r.cat)+" · "+esc(cpn)+'</span><span class="b">#'+esc(r.bib)+'</span><span class="n">'+esc(r.name||"")+'</span><span class="t num">'+clock(r.atMs)+"</span></li>";}).join("")+"</ul>":'<p class="empty">No checkpoint reports yet. Arrivals appear here as marshals record them.</p>';
+  h+='<section class="section"><div class="wrap grid two"><div class="card" style="padding:20px"><p class="eyebrow">'+km(code)+' · Checkpoint progress</p><p class="hint" style="margin:4px 0 16px">'+(total?total+" registered runners in this category":"Runner count appears once the runner list is loaded")+"</p>"+prog+
+    '</div><div class="card" style="padding:20px"><p class="eyebrow">Latest arrivals · all categories</p><div style="margin-top:6px">'+feed+"</div></div></div></section>";
+
+  // leaderboard
+  h+='<section class="section" style="padding-top:0"><div class="wrap"><div class="card" style="padding:20px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><p class="eyebrow">'+km(code)+" · Finish-line leaderboard</p>"+(fin.length?'<span class="pill '+(off?"ok":"prov")+'">'+(off?"Official":"Provisional")+"</span>":"")+"</div>"+
+    (fin.length?'<div class="scroll-x" style="margin-top:10px"><table><thead><tr><th>Rank</th><th>Bib</th><th>Runner</th><th>Finish time</th><th>Arrived</th></tr></thead><tbody>'+fin.map(function(f){return '<tr class="r'+f.rank+'"><td>'+f.rank+"</td><td>#"+esc(f.bib)+"</td><td>"+esc(f.name)+"</td><td>"+(f.elapsed!=null?hms(f.elapsed):"—")+"</td><td>"+clock(f.atMs)+"</td></tr>";}).join("")+"</tbody></table></div>":'<p class="empty">No finishers yet.</p>')+
+    "</div></div></section>";
+  h+='<div class="wrap foot"><p>Positions come only from reports by authorized Batch 2010 marshals. Nothing is assumed: a runner appears at a checkpoint only after a marshal records them there.</p><p>Finish times are measured from the official start recorded by the Race Director. Results stay provisional until the Race Director confirms them. All times are Philippine time.</p></div>';
+  return h;
+}
+function renderBoard(){var el=document.getElementById("board");if(el)el.innerHTML=vBoard();}
+
+/* ── staff tools ───────────────────────────────────── */
+var mode=ls("mode")||"checkpoint",station=ls("station")||"5K|cp1",marshal=ls("marshal")||"",queue=ls("queue")||[],myRecent=ls("recent")||[];
+var rlNote="",bcast=ls("broadcast")===true,lastPublish=0,publishNote="",confirmArm={};
+function runnerFor(bib){var b=normBib(bib);return (live.runners||[]).filter(function(r){return normBib(r.bib)===b;})[0]||null;}
+function stationOpts(){var race=live.race||PUB.race,o=[];CODES.forEach(function(c){cpList(race,c).forEach(function(cp){o.push([c+"|"+cp.key,km(c)+" · "+cp.name]);});});return o;}
+function connState(){if(!navigator.onLine)return ["off","OFFLINE"];if(live.fresh&&Date.now()-live.lastAnswer<45000)return ["live","LIVE"];return ["rec","RECONNECTING"];}
+
+function vStaff(){
+  var c=connState();
+  var h='<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between"><div><p class="eyebrow">Race staff only</p><h2 style="font-size:26px;margin-top:4px">Race-day tools</h2></div><span class="conn '+c[0]+'" id="conn"><i></i>'+c[1]+"</span></div>"+
+    '<div class="seg" role="group" aria-label="Tool"><button data-mode="checkpoint" aria-pressed="'+(mode==="checkpoint")+'">Record arrivals</button><button data-mode="control" aria-pressed="'+(mode==="control")+'">Race control</button></div>';
+  return h+'<div id="staff-body">'+(mode==="checkpoint"?vCheckpoint():vControl())+"</div>";
+}
+function vCheckpoint(){
+  var opts=stationOpts();if(!opts.some(function(o){return o[0]===station;}))station=opts[0][0];
+  return '<div class="grid two" style="align-items:start"><div class="card panel">'+
+    '<div class="row2"><div class="f"><label for="cp-station">My checkpoint</label><select id="cp-station">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===station?" selected":"")+">"+esc(o[1])+"</option>";}).join("")+'</select></div>'+
+    '<div class="f"><label for="cp-marshal">Marshal name</label><input id="cp-marshal" value="'+esc(marshal)+'" placeholder="e.g. Ana – TP1" autocomplete="off"></div></div>'+
+    '<div class="f"><label for="cp-bib">Race bib number</label><input id="cp-bib" class="bibin" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="0000"></div>'+
+    '<div class="runner" id="cp-runner"><span class="mute">Enter a bib to look up the runner.</span></div>'+
+    '<button class="btn btn-red bigbtn" id="cp-submit" disabled>Record arrival</button><div id="cp-toast" role="status" aria-live="polite"></div></div>'+
+    '<div class="card panel"><h3>My recent submissions</h3><div id="cp-queue"></div><div id="cp-recent"></div><p class="hint">Times use this phone’s clock at the moment you tap. Keep automatic date &amp; time turned on in your phone settings.</p></div></div>';
+}
+function vQueueRecent(){
+  var q=queue.length?'<div class="toast warn">'+queue.length+" waiting to send (no connection). They send automatically when the signal returns. Keep this page open.</div>":"";
+  var r=myRecent.slice(0,12);
+  var list=r.length?'<ul class="feed">'+r.map(function(x){return '<li><span class="tag'+(x.cp==="finish"?" fin":"")+'">'+km(x.cat)+" · "+esc(x.cpName)+(x.state==="queued"?" · waiting":x.state==="sent-late"?" · sent after reconnect":"")+'</span><span class="b">#'+esc(x.bib)+'</span><span class="n">'+esc(x.name)+'</span><span class="t num">'+clock(x.atMs)+"</span></li>";}).join("")+"</ul>":'<p class="hint">Nothing recorded from this phone yet.</p>';
+  return [q,list];
+}
+function paintQueue(){var a=vQueueRecent(),q=document.getElementById("cp-queue"),r=document.getElementById("cp-recent");if(q)q.innerHTML=a[0];if(r)r.innerHTML=a[1];}
+
+function vControl(){
+  if(!canPublish&&!isStaff)return "";
+  var race=live.race||PUB.race;
+  var h='<div class="grid" style="gap:16px">';
+  // broadcast
+  h+='<div class="card panel"><h3>Public broadcast</h3><p class="hint">Visitors without Claude accounts see the last broadcast. Turn this on for <b>one</b> device at race HQ and keep that page open during the race. It updates the public board about every 30 seconds when there is something new.</p>'+
+    (canPublish?'<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><button class="btn '+(bcast?"btn-line":"btn-green")+'" id="bc-toggle">'+(bcast?"Stop broadcasting from this device":"Broadcast from this device")+'</button><button class="btn btn-line" id="bc-now">Update public board now</button></div><p id="bc-note" class="hint">'+esc(publishNote||(bcast?"Broadcasting is on.":"Broadcasting is off on this device."))+"</p>":'<p class="toast warn">Only the website owner can broadcast.</p>')+"</div>";
+  // categories
+  h+='<div class="grid two">'+CODES.map(function(c){var r=race[c]||{},st=status({race:race},c),fin=(live.reports||[]).filter(function(x){return x.cat===c&&x.cp==="finish";}).length;
+    return '<div class="card panel"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3>'+km(c)+'</h3><span class="pill '+st[1]+'">'+st[0]+"</span></div>"+
+    '<p class="hint">'+(r.startedAt?"Started at "+clock(r.startedAt):"Not started yet")+" · "+fin+" finishers recorded</p>"+
+    '<div class="f"><label for="cps-'+c+'">Turning points, in order (one per line)</label><textarea id="cps-'+c+'" style="min-height:80px;font-family:var(--body);font-size:14px">'+esc((r.checkpoints||[]).join("\n"))+'</textarea><span class="hint">The finish line is added automatically.</span></div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-line btn-sm" data-savecp="'+c+'">Save turning points</button>'+
+    (r.startedAt?'<button class="btn btn-line btn-sm" data-arm="unstart-'+c+'">'+(confirmArm["unstart-"+c]?"Tap again to clear start":"Clear start time")+"</button>":'<button class="btn btn-red btn-sm" data-arm="start-'+c+'">'+(confirmArm["start-"+c]?"Tap again: START NOW":"Start race (gun)")+"</button>")+
+    '<button class="btn '+(r.official?"btn-line":"btn-green")+' btn-sm" data-arm="official-'+c+'">'+(confirmArm["official-"+c]?"Tap again to confirm":(r.official?"Mark provisional again":"Confirm official results"))+"</button></div></div>";}).join("")+"</div>";
+  // runners
+  var n=(live.runners||[]).length;
+  h+='<div class="card panel"><h3>Runner list</h3><p class="hint">'+(n?n+" runners loaded ("+CODES.map(function(c){return km(c)+": "+(totalsFrom(live.runners)[c]||0);}).join(", ")+")":"No runners loaded yet. Marshals can still record bibs, but names won’t show.")+'</p>'+
+    '<div class="f"><label for="rl-paste">Paste from Google Sheets: Bib, Name, Category</label><textarea id="rl-paste" placeholder="0001	Juan Dela Cruz	5KM&#10;0002	Maria Santos	12KM"></textarea><span class="hint">Copy the three columns (bib, name for public display, category) from your registration sheet and paste. Do not paste phone numbers or addresses. Pasting replaces the whole list.</span></div>'+
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn btn-line btn-sm" id="rl-save">Check &amp; save runner list</button><span id="rl-note" class="hint">'+esc(rlNote)+'</span></div></div>';
+  // reports
+  var reps=(live.reports||[]).slice().sort(function(a,b){return b.atMs-a.atMs;});
+  h+='<div class="card panel"><h3>All reports ('+reps.length+')</h3><p class="hint">Remove a report only if it was recorded by mistake. Removal is logged.</p>'+
+    (reps.length?'<div class="scroll-x"><table><thead><tr><th>Time</th><th>Cat</th><th>Checkpoint</th><th>Bib</th><th>Runner</th><th>Marshal</th><th></th></tr></thead><tbody>'+reps.slice(0,300).map(function(r){var cpn=(cpList(race,r.cat).filter(function(x){return x.key===r.cp;})[0]||{name:r.cp}).name;
+      return "<tr><td>"+clock(r.atMs)+(r.lateMs?' <span class="hint">(sent '+clock(r.lateMs)+")</span>":"")+"</td><td>"+km(r.cat)+"</td><td>"+esc(cpn)+"</td><td>#"+esc(r.bib)+"</td><td>"+esc(r.name)+"</td><td>"+esc(r.by)+'</td><td><button class="linkish" data-arm="del-'+esc(r.id)+'">'+(confirmArm["del-"+r.id]?"Tap to confirm":"Remove")+"</button></td></tr>";}).join("")+"</tbody></table></div>":'<p class="hint">No reports yet.</p>')+"</div>";
+  return h+"</div>";
+}
+function renderStaff(){var el=document.getElementById("staff");if(!el)return;if(!isStaff){el.hidden=true;return;}el.hidden=false;
+  var keep=document.activeElement&&document.activeElement.id,y=window.scrollY,vals={};
+  el.querySelectorAll("input[id],textarea[id]").forEach(function(i){vals[i.id]=i.value;});
+  el.innerHTML='<div class="wrap">'+vStaff()+"</div>";
+  Object.keys(vals).forEach(function(id){var i=document.getElementById(id);if(i)i.value=vals[id];});
+  if(document.getElementById("cp-bib"))lookup();
+  if(keep){var k=document.getElementById(keep);if(k)k.focus({preventScroll:true});}
+  window.scrollTo(0,y);paintQueue();}
+function paintConn(){var el=document.getElementById("conn");if(!el)return;var c=connState();el.className="conn "+c[0];el.innerHTML="<i></i>"+c[1];}
+setInterval(paintConn,3000);window.addEventListener("online",function(){paintConn();flushQueue();});window.addEventListener("offline",paintConn);
+
+/* checkpoint actions */
+function lookup(){
+  var bibEl=document.getElementById("cp-bib"),out=document.getElementById("cp-runner"),btn=document.getElementById("cp-submit");if(!bibEl)return;
+  var bib=normBib(bibEl.value),parts=station.split("|"),cat=parts[0];
+  if(!bib){out.className="runner";out.innerHTML='<span class="mute">Enter a bib to look up the runner.</span>';btn.disabled=true;return;}
+  var r=runnerFor(bib);
+  if(live.runners&&live.runners.length&&!r){out.className="runner bad";out.innerHTML="Bib #"+esc(bib)+" is not in the runner list. Check the number.";btn.disabled=true;return;}
+  if(r&&r.cat!==cat){out.className="runner bad";out.innerHTML="<b>"+esc(r.name)+"</b><span>Bib #"+esc(bib)+" is registered for "+km(r.cat)+", not "+km(cat)+".</span>";btn.disabled=true;return;}
+  var dupe=(live.reports||[]).filter(function(x){return x.cat===cat&&x.cp===parts[1]&&normBib(x.bib)===bib;})[0];
+  if(dupe){out.className="runner bad";out.innerHTML="Already recorded here at "+clock(dupe.atMs)+(dupe.by?" by "+esc(dupe.by):"")+".";btn.disabled=true;return;}
+  out.className="runner ok";out.innerHTML=r?"<b>"+esc(r.name)+"</b><span>Bib #"+esc(bib)+" · "+km(r.cat)+" ✓</span>":"<b>Bib #"+esc(bib)+'</b><span class="mute">No runner list loaded, so the name is unknown</span>';btn.disabled=false;
+}
+function toast(msg,cls){var t=document.getElementById("cp-toast");if(t)t.innerHTML='<div class="toast '+cls+'">'+msg+"</div>";}
+async function submit(){
+  var bibEl=document.getElementById("cp-bib"),bib=normBib(bibEl.value);if(!bib)return;
+  var parts=station.split("|"),cat=parts[0],cp=parts[1],race=live.race||PUB.race;
+  var cpName=(cpList(race,cat).filter(function(x){return x.key===cp;})[0]||{name:cp}).name,r=runnerFor(bib);
+  var rec={id:cat+"_"+cp+"_"+bib,bib:bib,name:r?r.name:"",cat:cat,cp:cp,atMs:Date.now(),by:marshal||"Marshal"};
+  bibEl.value="";lookup();bibEl.focus();
+  myRecent.unshift({bib:bib,name:rec.name,cat:cat,cp:cp,cpName:cpName,atMs:rec.atMs,state:"sending"});myRecent=myRecent.slice(0,40);ls("recent",myRecent);
+  try{await writeReport(rec);myRecent[0].state="sent";toast("✓ Recorded #"+esc(bib)+(rec.name?" "+esc(rec.name):"")+" at "+clock(rec.atMs),"ok");}
+  catch(e){if(e&&e.code==="duplicate"){myRecent.shift();toast("Already recorded: #"+esc(bib)+" at "+clock(e.atMs)+". Not saved again.","err");}
+    else{myRecent[0].state="queued";queue.push(rec);ls("queue",queue);toast("No connection. #"+esc(bib)+" is saved on this phone with the time "+clock(rec.atMs)+" and will send automatically.","warn");}}
+  ls("recent",myRecent);paintQueue();
+}
+async function writeReport(rec){
+  if(!db)throw {code:"offline"};
+  var ref=db.doc("reports/"+rec.id),snap=await ref.get();
+  if(snap.exists){var ex=snap.data();throw {code:"duplicate",atMs:ex.atMs};}
+  await ref.set(rec);
+}
+var flushing=false;
+async function flushQueue(){
+  if(flushing||!queue.length||!db||!navigator.onLine)return;flushing=true;
+  try{while(queue.length){var rec=queue[0];rec.lateMs=Date.now();
+      try{await writeReport(rec);}catch(e){if(!e||e.code!=="duplicate"){delete rec.lateMs;break;}}
+      queue.shift();ls("queue",queue);
+      myRecent.forEach(function(m){if(m.state==="queued"&&m.bib===rec.bib&&m.cp===rec.cp&&m.cat===rec.cat)m.state="sent-late";});ls("recent",myRecent);}
+  }finally{flushing=false;paintQueue();}
+}
+setInterval(flushQueue,15000);
+
+/* race control actions */
+async function saveRace(mut,label){
+  var race=JSON.parse(JSON.stringify(live.race||PUB.race));mut(race);
+  try{await db.doc("config/race").set(race);await audit(label);}catch(e){alertBox("Could not save: "+((e&&e.message)||"connection problem")+". Try again.");}
+}
+async function audit(what){try{await db.collection("audit").add({what:what,by:marshal||"Race control",atMs:Date.now()});}catch(e){}}
+function alertBox(msg){publishNote=msg;var n=document.getElementById("bc-note");if(n)n.textContent=msg;else toast(esc(msg),"err");}
+function parseRunners(text){
+  var out=[],bad=[],seen={};
+  text.split(/\r?\n/).forEach(function(line,i){if(!line.trim())return;var cells=line.split(/\t|,|;/).map(function(s){return s.trim();});
+    var bib=normBib(cells[0]),name=cells[1]||"",cat=normCat(cells[2]);
+    if(i===0&&!bib&&/bib/i.test(line))return;
+    if(!bib||!name||!cat){bad.push(i+1);return;}
+    if(seen[bib]){bad.push(i+1+" (duplicate bib "+bib+")");return;}seen[bib]=1;out.push({bib:bib,name:name.slice(0,80),cat:cat});});
+  return {list:out,bad:bad};
+}
+
+/* publish (owner) */
+function snapshot(){
+  var reps=(live.reports||[]).map(function(r){return {bib:r.bib,name:r.name,cat:r.cat,cp:r.cp,atMs:r.atMs};}).sort(function(a,b){return a.atMs-b.atMs;});
+  return {v:1,race:live.race||PUB.race,totals:totalsFrom(live.runners),reports:reps};
+}
+function same(a,b){return JSON.stringify(Object.assign({},a,{updatedAt:0}))===JSON.stringify(Object.assign({},b,{updatedAt:0}));}
+function buildDoc(pub){
+  var json=JSON.stringify(pub).replace(/</g,"\\u003c");
+  return HEAD+"<title>"+TITLE+'</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">\n'+
+    '<style id="lr-style">'+document.getElementById("lr-style").textContent+'</style>\n\n<div id="app"></div>\n\n<script type="application/json" id="pub-data">'+json+"<\/script>\n\n"+
+    '<script id="lr-app">'+document.getElementById("lr-app").textContent+"<\/script>\n</body></html>";
+}
+var backoffUntil=0;
+async function publish(force){
+  if(!artifactNs||!live.reports||!live.race)return;
+  var s=snapshot();if(!force&&same(s,{v:PUB.v,race:PUB.race,totals:PUB.totals,reports:PUB.reports}))return;
+  if(Date.now()<backoffUntil)return;
+  s.updatedAt=Date.now();lastPublish=Date.now();ls("lastPublish",lastPublish);
+  try{await artifactNs.publish(buildDoc(s));}
+  catch(e){var c=e&&e.code;
+    if(c==="conflict")return;
+    if(c==="rate_limited"){backoffUntil=Date.now()+120000;alertBox("The platform asked us to slow down. The next update goes out in about 2 minutes.");}
+    else if(c==="not_writer"||c==="not_granted"){bcast=false;ls("broadcast",false);alertBox("This account cannot update the public board. Only the owner can broadcast.");}
+    else if(c==="too_large"){alertBox("The board is too large to publish. Contact the developer.");}
+    else alertBox("Update failed ("+(c||"error")+"). Retrying automatically.");}
+}
+setInterval(function(){if(bcast&&Date.now()-(ls("lastPublish")||0)>=30000)publish(false);},5000);
+
+/* events */
+document.addEventListener("input",function(e){var t=e.target;
+  if(t.id==="cp-bib")lookup();
+  if(t.id==="cp-marshal"){marshal=t.value.trim();ls("marshal",marshal);}
+});
+document.addEventListener("change",function(e){if(e.target.id==="cp-station"){station=e.target.value;ls("station",station);lookup();}});
+document.addEventListener("keydown",function(e){if(e.target.id==="cp-bib"&&e.key==="Enter"){e.preventDefault();var b=document.getElementById("cp-submit");if(b&&!b.disabled)submit();}});
+document.addEventListener("click",async function(e){var b=e.target.closest("button");if(!b)return;
+  if(b.dataset.mode){mode=b.dataset.mode;ls("mode",mode);renderStaff();return;}
+  if(b.id==="cp-submit"){submit();return;}
+  if(b.id==="bc-toggle"){bcast=!bcast;ls("broadcast",bcast);publishNote=bcast?"Broadcasting is on. Keep this page open.":"Broadcasting is off on this device.";renderStaff();if(bcast)publish(false);return;}
+  if(b.id==="bc-now"){publishNote="Updating the public board…";renderStaff();publish(true);return;}
+  if(b.dataset.savecp){var c=b.dataset.savecp,v=document.getElementById("cps-"+c).value.split("\n").map(function(s){return s.trim();}).filter(Boolean).slice(0,10);
+    await saveRace(function(r){r[c].checkpoints=v;},"Turning points for "+km(c)+": "+v.join(", "));return;}
+  if(b.id==="rl-save"){var p=parseRunners(document.getElementById("rl-paste").value),note={set textContent(v){rlNote=v;var n=document.getElementById("rl-note");if(n)n.textContent=v;}};
+    if(!p.list.length){note.textContent="No valid rows found. Each row needs a bib number, a name and a category (5KM, 8KM or 12KM).";return;}
+    if(p.bad.length&&!confirmArm.runners){confirmArm.runners=true;note.textContent=p.list.length+" runners OK; "+p.bad.length+" rows skipped (rows "+p.bad.slice(0,8).join(", ")+(p.bad.length>8?"…":"")+"). Tap again to save anyway.";return;}
+    confirmArm.runners=false;try{await db.doc("config/runners").set({list:p.list,savedAtMs:Date.now()});await audit("Runner list replaced ("+p.list.length+" runners)");note.textContent="Saved "+p.list.length+" runners.";}catch(err){note.textContent="Could not save: "+((err&&err.message)||"connection problem");}return;}
+  if(b.dataset.arm){var k=b.dataset.arm;
+    if(!confirmArm[k]){confirmArm[k]=true;renderStaff();setTimeout(function(){if(confirmArm[k]){confirmArm[k]=false;renderStaff();}},5000);return;}
+    confirmArm[k]=false;var m=k.match(/^(start|unstart|official)-(\w+)$/);
+    if(m){var cc=m[2];
+      if(m[1]==="start"){var t=Date.now();await saveRace(function(r){r[cc].startedAt=t;},km(cc)+" race started at "+clock(t));}
+      if(m[1]==="unstart")await saveRace(function(r){r[cc].startedAt=0;},km(cc)+" start time cleared");
+      if(m[1]==="official"){var nowOff=!((live.race||PUB.race)[cc]||{}).official;await saveRace(function(r){r[cc].official=nowOff;},km(cc)+" results marked "+(nowOff?"OFFICIAL":"provisional"));}
+      if(bcast)publish(true);return;}
+    if(k.indexOf("del-")===0){var id=k.slice(4),rep=(live.reports||[]).filter(function(x){return x.id===id;})[0];
+      try{await db.doc("reports/"+id).delete();await audit("Removed report "+(rep?km(rep.cat)+" "+rep.cp+" #"+rep.bib+" at "+clock(rep.atMs):id));}catch(err){alertBox("Could not remove: "+((err&&err.message)||"connection problem"));}}
+  }
+});
+window.addEventListener("hashchange",renderBoard);
+
+/* boot */
+function start(){
+  // Staff tools come first so marshals reach bib entry without scrolling; the public never sees them.
+  document.getElementById("app").innerHTML='<section class="staff" id="staff" hidden></section><main id="board"></main>';
+  renderBoard();
+  setInterval(function(){if(!live.reports)renderBoard();},60000);
+  connect();
+}
+async function connect(){
+  if(!window.claude||!window.claude.use)return;
+  try{db=await window.claude.use("db");}catch(e){db=null;}
+  if(!db)return;
+  var user=null;try{user=await window.claude.use("user");}catch(e){}
+  var canWrite=null,edit=false;
+  try{if(user){edit=await user.canEdit();canWrite=await user.can("data.write");}}catch(e){}
+  isStaff=edit||canWrite===true;
+  if(edit){try{artifactNs=await window.claude.use("artifact");canPublish=!!artifactNs;}catch(e){}}
+  if(!isStaff)return; // signed-in public viewers keep the published board
+  var timer=setTimeout(function(){live.fresh=false;paintConn();},10000);
+  function seen(s){live.lastAnswer=Date.now();if(!s.metadata.fromCache){live.fresh=true;clearTimeout(timer);}paintConn();}
+  db.doc("config/race").onSnapshot(function(s){seen(s);live.race=s.exists?s.data():JSON.parse(JSON.stringify(PUB.race));renderBoard();if(mode==="control")renderStaff();else lookup();},function(){live.fresh=false;paintConn();});
+  db.doc("config/runners").onSnapshot(function(s){seen(s);live.runners=s.exists?(s.data().list||[]):[];renderBoard();if(mode==="control")renderStaff();else lookup();},function(){live.fresh=false;paintConn();});
+  db.collection("reports").onSnapshot(function(s){seen(s);live.reports=s.docs.map(function(d){var x=Object.assign({},d.data());x.id=d.id;return x;});renderBoard();if(mode==="control")renderStaff();else lookup();flushQueue();},function(){live.fresh=false;paintConn();});
+  renderStaff();
+}
+if(hot&&typeof hot.ready==="function")hot.ready(start);else start();
+})();
+</script>
