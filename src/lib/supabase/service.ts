@@ -9,7 +9,7 @@ import { env, isServiceRoleConfigured } from "@/lib/env";
  */
 export function getServiceClient() {
   if (!isServiceRoleConfigured()) return null;
-  return createClient(env.supabaseUrl, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+  return createClient(env.supabaseUrl, process.env.SUPABASE_SERVICE_ROLE_KEY!.trim().replace(/^["']+|["']+$/g, ""), {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }

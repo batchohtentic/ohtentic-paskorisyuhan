@@ -1,12 +1,8 @@
 import type { NextConfig } from "next";
+import { readSupabaseConfig } from "./src/lib/supabase-config";
 
-const supabaseHost = (() => {
-  try {
-    return process.env.NEXT_PUBLIC_SUPABASE_URL ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname : undefined;
-  } catch {
-    return undefined;
-  }
-})();
+const supabaseCfg = readSupabaseConfig(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+const supabaseHost = supabaseCfg.ok ? new URL(supabaseCfg.url).hostname : undefined;
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,

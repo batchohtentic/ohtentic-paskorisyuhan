@@ -1,12 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { readSupabaseConfig } from "@/lib/supabase-config";
 
 /** Refreshes the auth session cookie and returns the signed-in user id (if any). */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return { response, userId: null as string | null, configured: false };
+  const { url, key, ok } = readSupabaseConfig(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+  if (!ok) return { response, userId: null as string | null, configured: false };
 
   const supabase = createServerClient(url, key, {
     cookies: {

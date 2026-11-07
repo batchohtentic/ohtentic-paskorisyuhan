@@ -5,7 +5,7 @@ import { Parol } from "@/components/Parol";
 import { Wordmark } from "@/components/Wordmark";
 import { AwaitingNotice } from "@/components/ui";
 import { getStaff } from "@/lib/auth/session";
-import { isSupabaseConfigured } from "@/lib/env";
+import { env, isSupabaseConfigured } from "@/lib/env";
 import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = { title: "Admin Login", robots: { index: false } };
@@ -28,7 +28,15 @@ export default async function LoginPage() {
           <Wordmark />
           <h1 className="mt-10 text-3xl font-semibold">Admin sign in</h1>
           <p className="mt-2 text-sm text-ink-soft">For authorized Batch 2010 staff only. All sign-ins are logged.</p>
-          {!configured && <div className="mt-6"><AwaitingNotice title="Authentication — awaiting configuration">Connect Supabase (see docs/SETUP.md) to enable staff sign-in.</AwaitingNotice></div>}
+          {!configured && (
+            <div className="mt-6">
+              <AwaitingNotice title={env.supabaseProblem ? "Supabase setting needs fixing" : "Authentication — awaiting configuration"}>
+                {env.supabaseProblem
+                  ? <>{env.supabaseProblem} Then open Vercel → Deployments → ⋯ → Redeploy.</>
+                  : <>Add the Supabase settings in Vercel (see docs/SETUP.md) to enable staff sign-in.</>}
+              </AwaitingNotice>
+            </div>
+          )}
           <div className="mt-8"><LoginForm configured={configured} /></div>
           <Link href="/" className="mt-10 inline-block text-sm text-ink-mute hover:text-maroon-800">← Back to public website</Link>
         </div>

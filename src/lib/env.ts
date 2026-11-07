@@ -3,19 +3,35 @@
  * Pages use these to show an honest "awaiting configuration" state
  * instead of fake data when credentials are not yet provided.
  */
+import { readSupabaseConfig } from "./supabase-config";
+
+const supabase = readSupabaseConfig(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+if (supabase.problem) console.warn("[config] Supabase is not connected:", supabase.problem);
+
+function siteUrl(): string {
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? "").trim().replace(/\/+$/, "");
+  try {
+    return new URL(/^https?:\/\//.test(raw) ? raw : `https://${raw}`).origin;
+  } catch {
+    return process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
+  }
+}
+
 export const env = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-  supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+  siteUrl: siteUrl(),
+  supabaseUrl: supabase.url,
+  supabaseAnonKey: supabase.key,
+  /** Plain-language reason Supabase is not connected, if a value was entered but is unusable. */
+  supabaseProblem: supabase.problem,
 };
 
 export function isSupabaseConfigured(): boolean {
-  return Boolean(env.supabaseUrl && env.supabaseAnonKey);
+  return supabase.ok;
 }
 
 /** Server-only check. Never import the key itself into client components. */
 export function isServiceRoleConfigured(): boolean {
-  return Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY) && isSupabaseConfigured();
+  return Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()) && isSupabaseConfigured();
 }
 
 export function isGoogleSheetsConfigured(): boolean {
